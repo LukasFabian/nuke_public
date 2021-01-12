@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------------------------------------
 #
-# AUTOMATICALLY GENERATED FILE TO BE USED BY W_HOTBOX on IBKColor
+# AUTOMATICALLY GENERATED FILE TO BE USED BY W_HOTBOX on the IBKColor Gizmo
 #
 # NAME: create Stack
 # 
