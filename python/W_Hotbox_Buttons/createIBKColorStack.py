@@ -3,7 +3,7 @@
 # AUTOMATICALLY GENERATED FILE TO BE USED BY W_HOTBOX on IBKColor
 #
 # NAME: create Stack
-# test for update
+# 
 #----------------------------------------------------------------------------------------------------------
 
 nuke.nodeCopy("%clipboard%")
