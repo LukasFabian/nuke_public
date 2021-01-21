@@ -1,0 +1,56 @@
+Group {
+ name LookAt_2d
+ selected true
+ xpos 11023
+ ypos -3639
+ addUserKnob {20 User l Controls}
+ addUserKnob {41 lookat l "look at" T LookAt_2d3.lookat}
+ addUserKnob {26 ""}
+ addUserKnob {41 translate T LookAt_2d3.translate}
+ addUserKnob {41 roffs l "rotation offset" T LookAt_2d3.roffs}
+ addUserKnob {41 rotate l "rotation (read only!)" T LookAt_2d3.rotate}
+ addUserKnob {41 scale T LookAt_2d3.scale}
+ addUserKnob {41 skewX l "skew X" T LookAt_2d3.skewX}
+ addUserKnob {41 skewY l "skew Y" T LookAt_2d3.skewY}
+ addUserKnob {41 skew_order l "skew order" T LookAt_2d3.skew_order}
+ addUserKnob {41 center T LookAt_2d3.center}
+ addUserKnob {41 invert_matrix l invert T LookAt_2d3.invert_matrix}
+ addUserKnob {41 filter T LookAt_2d3.filter}
+ addUserKnob {41 clamp -STARTLINE T LookAt_2d3.clamp}
+ addUserKnob {41 black_outside l "black outside" -STARTLINE T LookAt_2d3.black_outside}
+ addUserKnob {41 motionblur T LookAt_2d3.motionblur}
+ addUserKnob {41 shutter T LookAt_2d3.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T LookAt_2d3.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T LookAt_2d3.shuttercustomoffset}
+ addUserKnob {26 ""}
+ addUserKnob {26 "" -STARTLINE T "LookAt_2d v1.0\nby Lukas Fabian - March 2019"}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 821
+  ypos 420
+ }
+ Transform {
+  rotate {{degrees((atan2(center.x+translate.x-lookat.x,center.y+translate.y-lookat.y)*-1))+roffs x1056 0}}
+  center {1024 778}
+  filter Mitchell
+  name LookAt_2d3
+  selected true
+  xpos 821
+  ypos 487
+  addUserKnob {20 User l "Look At"}
+  addUserKnob {26 ""}
+  addUserKnob {12 lookat l "look at"}
+  lookat {1206 1074}
+  addUserKnob {7 roffs l "rotation offset" R 0 360}
+  roffs 180
+  addUserKnob {26 ""}
+  addUserKnob {26 text l "" +STARTLINE T "LookAt_2d v1.0\nby Lukas Fabian - March 2019"}
+ }
+ Output {
+  name Output1
+  xpos 821
+  ypos 587
+ }
+end_group
