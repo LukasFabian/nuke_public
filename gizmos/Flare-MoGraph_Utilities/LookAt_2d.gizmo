@@ -1,8 +1,11 @@
+set cut_paste_input [stack 0]
+version 11.3 v6
+push $cut_paste_input
 Group {
- name LookAt_2d
+ name LookAt_2d1
  selected true
- xpos 11023
- ypos -3639
+ xpos 11129
+ ypos -3415
  addUserKnob {20 User l Controls}
  addUserKnob {41 lookat l "look at" T LookAt_2d3.lookat}
  addUserKnob {26 ""}
@@ -32,11 +35,10 @@ Group {
   ypos 420
  }
  Transform {
-  rotate {{degrees((atan2(center.x+translate.x-lookat.x,center.y+translate.y-lookat.y)*-1))+roffs x1056 0}}
+  rotate {{degrees((atan2(center.x+translate.x-lookat.x,center.y+translate.y-lookat.y)*-1))+roffs}}
   center {1024 778}
   filter Mitchell
   name LookAt_2d3
-  selected true
   xpos 821
   ypos 487
   addUserKnob {20 User l "Look At"}
@@ -54,3 +56,4 @@ Group {
   ypos 587
  }
 end_group
+
