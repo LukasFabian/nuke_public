@@ -1,0 +1,55 @@
+NoOp {
+ name Dynamic_Trigger
+ selected true
+ xpos 10836
+ ypos -3644
+ addUserKnob {20 User}
+ addUserKnob {12 pos l position_2d}
+ addUserKnob {7 expand l "expand border distance" R -0.5 0.5}
+ expand 0.1
+ addUserKnob {7 ceexpo l "exponent for center falloff" R 1 10}
+ ceexpo 7
+ addUserKnob {7 boexpo l "exponent for boarder falloff" R 1 10}
+ boexpo 5
+ addUserKnob {26 ""}
+ addUserKnob {26 text l "" +STARTLINE T "read only!"}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_2 l "exponential triggers"}
+ addUserKnob {7 centtriggerexp l "exponential center trigger"}
+ centtriggerexp {{"pow(centtriggerlin, ceexpo)"}}
+ addUserKnob {7 botriggerexp l "exponential boarder trigger"}
+ botriggerexp {{pow(botriggerlin,boexpo)}}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_3 l "linear triggers"}
+ addUserKnob {7 centtriggerlin l "linear center trigger"}
+ centtriggerlin {{clamp(1-distnrmlz)}}
+ addUserKnob {7 botriggerlin l "linear boarder trigger"}
+ botriggerlin {{1-dist2boabs}}
+ addUserKnob {26 ""}
+ addUserKnob {26 ""}
+ addUserKnob {7 dist l "absolute distance2center"}
+ dist {{"sqrt( pow2(pos.x-(width/2)) + pow2(pos.y-height/2) )"}}
+ addUserKnob {7 distnrmlz l "normalized distance2center"}
+ distnrmlz {{dist/(width/2)}}
+ addUserKnob {7 dist2bo l "normalized distance2boarder"}
+ dist2bo {{1-(dist/((width/2)*(expand+1)))}}
+ addUserKnob {7 dist2boabs l "normalized dist2boarder abs"}
+ dist2boabs {{abs(dist2bo)}}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_1 l "" +STARTLINE T "Dynamic Trigger v1.0\nby Lukas Fabian - March 2019"}
+}
+Expression {
+ temp_name0 expand
+ temp_expr0 parent.Dynamic_Trigger.expand
+ temp_name1 ceexpo
+ temp_expr1 parent.Dynamic_Trigger.ceexpo
+ temp_name2 boexpo
+ temp_expr2 parent.Dynamic_Trigger.boexpo
+ expr0 "pow((sqrt(pow2( ((x-(width/2)))/((width/2)*(expand+1)) ) + pow2( ((y-(height/2)))/((width/2)*(expand+1))))) , boexpo)"
+ expr1 "pow((1-(sqrt(pow2( ((x-(width/2)))/((width/2)) ) + pow2( ((y-(height/2)))/((width/2)))))), ceexpo)"
+ name Expression21
+ label "visualize exponential\nfalloff"
+ selected true
+ xpos 10836
+ ypos -3618
+}
