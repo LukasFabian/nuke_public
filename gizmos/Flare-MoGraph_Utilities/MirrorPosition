@@ -1,0 +1,22 @@
+NoOp {
+ name MirrorPosition
+ selected true
+ xpos 11195
+ ypos -3641
+ addUserKnob {20 User l Controls}
+ addUserKnob {7 offsetx l "static offset x" R -100 100}
+ addUserKnob {7 offsety l "static offset y" R -100 100}
+ addUserKnob {26 ""}
+ addUserKnob {7 scalex l "dynamic offset x" R -1 1}
+ addUserKnob {7 scaley l "dynamic offset y" R -1 1}
+ addUserKnob {6 mirx l "mirror x" +STARTLINE}
+ mirx true
+ addUserKnob {6 miry l "mirror y" -STARTLINE}
+ miry true
+ addUserKnob {20 tab l Positions}
+ addUserKnob {12 inpos l "input position"}
+ addUserKnob {26 ""}
+ addUserKnob {12 opos l "read output position"}
+ opos {{"mirx == 1 ? ( ( (inpos.x-(width/2))*(scalex+1)+offsetx*10 )*-1  )+(width/2) :  ((inpos.x-(width/2))*(scalex+1)+offsetx*10)+(width/2)"} {"miry == 1 ? (((inpos.y-(height/2))*(scaley+1)+offsety*10)*-1)+(height/2) :  ((inpos.y-(height/2))*(scaley+1)+offsety*10)+(height/2)"}}
+ addUserKnob {26 text l "" +STARTLINE T "read only!"}
+}
