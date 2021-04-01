@@ -1,0 +1,8192 @@
+Group {
+ inputs 0
+ name DemoFlare
+ selected true
+ xpos -202
+ ypos 1712
+ addUserKnob {20 User}
+ addUserKnob {41 format l "output format" T Reformat1.format}
+ addUserKnob {41 position_2d T NoOp1.position_2d}
+ addUserKnob {20 group n 1}
+ group 0
+ addUserKnob {41 value l "core intensity" T Multiply11.value}
+ addUserKnob {41 value_1 l "ghosts intensity" T Multiply9.value}
+ addUserKnob {41 vignetteintensity l "vignette intensity" T Multiply10.value}
+ addUserKnob {20 endGroup n -1}
+}
+ Reformat {
+  inputs 0
+  format "1280 720 0 0 1280 720 1 HD_720"
+  name Reformat1
+  xpos -887
+  ypos -522
+ }
+ Dot {
+  name Dot14
+  xpos -853
+  ypos -454
+ }
+set N724fcb30 [stack 0]
+ Dot {
+  name Dot1
+  xpos -853
+  ypos -58
+ }
+set N411cc30 [stack 0]
+ Dot {
+  name Dot5
+  xpos -2259
+  ypos -58
+ }
+set N191aa100 [stack 0]
+ Dot {
+  name Dot3
+  xpos -2775
+  ypos -58
+ }
+set N7c8db2b0 [stack 0]
+ Dot {
+  name Dot2
+  xpos -3611
+  ypos -58
+ }
+ Dot {
+  name Dot11
+  xpos -3611
+  ypos 170
+ }
+set N723fa870 [stack 0]
+ NoOp {
+  name Dynamic_Trigger
+  xpos -3525
+  ypos 312
+  addUserKnob {20 User}
+  addUserKnob {12 pos l position_2d}
+  pos {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  addUserKnob {7 expand l "expand border distance" R -0.5 0.5}
+  expand 0.1
+  addUserKnob {7 ceexpo l "exponent for center falloff" R 1 10}
+  ceexpo 2
+  addUserKnob {7 boexpo l "exponent for boarder falloff" R 1 10}
+  boexpo 5
+  addUserKnob {26 ""}
+  addUserKnob {26 text l "" +STARTLINE T "read only!"}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_2 l "exponential triggers"}
+  addUserKnob {7 centtriggerexp l "exponential center trigger"}
+  centtriggerexp {{"pow(centtriggerlin, ceexpo)"}}
+  addUserKnob {7 botriggerexp l "exponential boarder trigger"}
+  botriggerexp {{pow(botriggerlin,boexpo)}}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_3 l "linear triggers"}
+  addUserKnob {7 centtriggerlin l "linear center trigger"}
+  centtriggerlin {{clamp(1-distnrmlz)}}
+  addUserKnob {7 botriggerlin l "linear boarder trigger"}
+  botriggerlin {{1-dist2boabs}}
+  addUserKnob {26 ""}
+  addUserKnob {26 ""}
+  addUserKnob {7 dist l "absolute distance2center"}
+  dist {{"sqrt( pow2(pos.x-(width/2)) + pow2(pos.y-height/2) )"}}
+  addUserKnob {7 distnrmlz l "normalized distance2center"}
+  distnrmlz {{dist/(width/2)}}
+  addUserKnob {7 dist2bo l "normalized distance2boarder"}
+  dist2bo {{1-(dist/((width/2)*(expand+1)))}}
+  addUserKnob {7 dist2boabs l "normalized dist2boarder abs"}
+  dist2boabs {{abs(dist2bo)}}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_1 l "" +STARTLINE T "Dynamic Trigger v1.0\nby Lukas Fabian - March 2019"}
+ }
+ Expression {
+  temp_name0 expand
+  temp_expr0 parent.Dynamic_Trigger.expand
+  temp_name1 ceexpo
+  temp_expr1 parent.Dynamic_Trigger.ceexpo
+  temp_name2 boexpo
+  temp_expr2 parent.Dynamic_Trigger.boexpo
+  expr0 "pow((sqrt(pow2( ((x-(width/2)))/((width/2)*(expand+1)) ) + pow2( ((y-(height/2)))/((width/2)*(expand+1))))) , boexpo)"
+  expr1 "pow((1-(sqrt(pow2( ((x-(width/2)))/((width/2)) ) + pow2( ((y-(height/2)))/((width/2)))))), ceexpo)"
+  name Expression21
+  label "visualize exponential\nfalloff"
+  xpos -3525
+  ypos 338
+ }
+push $N411cc30
+ Dot {
+  name Dot17
+  xpos 216
+  ypos -58
+ }
+set Nfce17330 [stack 0]
+ Dot {
+  name Dot12
+  xpos 1334
+  ypos -58
+ }
+push $N723fa870
+ NoOp {
+  name Dynamic_Trigger1
+  xpos -3327
+  ypos 166
+  addUserKnob {20 User}
+  addUserKnob {12 pos l position_2d}
+  pos {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  addUserKnob {7 expand l "expand border distance" R -0.5 0.5}
+  expand -0.1
+  addUserKnob {7 ceexpo l "exponent for center falloff" R 1 10}
+  ceexpo 1.2
+  addUserKnob {7 boexpo l "exponent for boarder falloff" R 1 10}
+  boexpo 5
+  addUserKnob {26 ""}
+  addUserKnob {26 text l "" +STARTLINE T "read only!"}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_2 l "exponential triggers"}
+  addUserKnob {7 centtriggerexp l "exponential center trigger"}
+  centtriggerexp {{"pow(centtriggerlin, ceexpo)"}}
+  addUserKnob {7 botriggerexp l "exponential boarder trigger"}
+  botriggerexp {{pow(botriggerlin,boexpo)}}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_3 l "linear triggers"}
+  addUserKnob {7 centtriggerlin l "linear center trigger"}
+  centtriggerlin {{clamp(1-distnrmlz)}}
+  addUserKnob {7 botriggerlin l "linear boarder trigger"}
+  botriggerlin {{1-dist2boabs}}
+  addUserKnob {26 ""}
+  addUserKnob {26 ""}
+  addUserKnob {7 dist l "absolute distance2center"}
+  dist {{"sqrt( pow2(pos.x-(width/2)) + pow2(pos.y-height/2) )"}}
+  addUserKnob {7 distnrmlz l "normalized distance2center"}
+  distnrmlz {{dist/(width/2)}}
+  addUserKnob {7 dist2bo l "normalized distance2boarder"}
+  dist2bo {{1-(dist/((width/2)*(expand+1)))}}
+  addUserKnob {7 dist2boabs l "normalized dist2boarder abs"}
+  dist2boabs {{abs(dist2bo)}}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_1 l "" +STARTLINE T "Dynamic Trigger v1.0\nby Lukas Fabian - March 2019"}
+ }
+ Expression {
+  temp_name0 expand
+  temp_expr0 parent.Dynamic_Trigger1.expand
+  temp_name1 ceexpo
+  temp_expr1 parent.Dynamic_Trigger1.ceexpo
+  temp_name2 boexpo
+  temp_expr2 parent.Dynamic_Trigger1.boexpo
+  expr0 "pow((sqrt(pow2( ((x-(width/2)))/((width/2)*(expand+1)) ) + pow2( ((y-(height/2)))/((width/2)*(expand+1))))) , boexpo)"
+  expr1 "pow((1-(sqrt(pow2( ((x-(width/2)))/((width/2)) ) + pow2( ((y-(height/2)))/((width/2)))))), ceexpo)"
+  name Expression1
+  label "visualize exponential\nfalloff"
+  xpos -3327
+  ypos 217
+ }
+push $N723fa870
+ NoOp {
+  name Dynamic_Trigger2
+  xpos -3791
+  ypos 275
+  addUserKnob {20 User}
+  addUserKnob {12 pos l position_2d}
+  pos {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  addUserKnob {7 expand l "expand border distance" R -0.5 0.5}
+  expand 0.2
+  addUserKnob {7 ceexpo l "exponent for center falloff" R 1 10}
+  ceexpo 4
+  addUserKnob {7 boexpo l "exponent for boarder falloff" R 1 10}
+  boexpo 5
+  addUserKnob {26 ""}
+  addUserKnob {26 text l "" +STARTLINE T "read only!"}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_2 l "exponential triggers"}
+  addUserKnob {7 centtriggerexp l "exponential center trigger"}
+  centtriggerexp {{"pow(centtriggerlin, ceexpo)"}}
+  addUserKnob {7 botriggerexp l "exponential boarder trigger"}
+  botriggerexp {{pow(botriggerlin,boexpo)}}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_3 l "linear triggers"}
+  addUserKnob {7 centtriggerlin l "linear center trigger"}
+  centtriggerlin {{clamp(1-distnrmlz)}}
+  addUserKnob {7 botriggerlin l "linear boarder trigger"}
+  botriggerlin {{1-dist2boabs}}
+  addUserKnob {26 ""}
+  addUserKnob {26 ""}
+  addUserKnob {7 dist l "absolute distance2center"}
+  dist {{"sqrt( pow2(pos.x-(width/2)) + pow2(pos.y-height/2) )"}}
+  addUserKnob {7 distnrmlz l "normalized distance2center"}
+  distnrmlz {{dist/(width/2)}}
+  addUserKnob {7 dist2bo l "normalized distance2boarder"}
+  dist2bo {{1-(dist/((width/2)*(expand+1)))}}
+  addUserKnob {7 dist2boabs l "normalized dist2boarder abs"}
+  dist2boabs {{abs(dist2bo)}}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_1 l "" +STARTLINE T "Dynamic Trigger v1.0\nby Lukas Fabian - March 2019"}
+ }
+ Expression {
+  temp_name0 expand
+  temp_expr0 parent.Dynamic_Trigger2.expand
+  temp_name1 ceexpo
+  temp_expr1 parent.Dynamic_Trigger2.ceexpo
+  temp_name2 boexpo
+  temp_expr2 parent.Dynamic_Trigger2.boexpo
+  expr0 "pow((sqrt(pow2( ((x-(width/2)))/((width/2)*(expand+1)) ) + pow2( ((y-(height/2)))/((width/2)*(expand+1))))) , boexpo)"
+  expr1 "pow((1-(sqrt(pow2( ((x-(width/2)))/((width/2)) ) + pow2( ((y-(height/2)))/((width/2)))))), ceexpo)"
+  name Expression2
+  label "visualize exponential\nfalloff"
+  xpos -3791
+  ypos 301
+ }
+push $N7c8db2b0
+ Dot {
+  name Dot4
+  xpos -2775
+  ypos 118
+ }
+set N72af4ce0 [stack 0]
+ Dot {
+  name Dot8
+  xpos -2775
+  ypos 314
+ }
+set Nc53606b0 [stack 0]
+ Dot {
+  name Dot9
+  xpos -2775
+  ypos 790
+ }
+set Nc7a69c10 [stack 0]
+ NoOp {
+  name MirrorPosition
+  xpos -2651
+  ypos 817
+  addUserKnob {20 User l Controls}
+  addUserKnob {7 offsetx l "static offset x" R -100 100}
+  addUserKnob {7 offsety l "static offset y" R -100 100}
+  addUserKnob {26 ""}
+  addUserKnob {7 scalex l "dynamic offset x" R -1 1}
+  scalex 0.17
+  addUserKnob {7 scaley l "dynamic offset y" R -1 1}
+  scaley -0.285
+  addUserKnob {6 mirx l "mirror x" +STARTLINE}
+  mirx true
+  addUserKnob {6 miry l "mirror y" -STARTLINE}
+  addUserKnob {20 tab l Positions}
+  addUserKnob {12 inpos l "input position"}
+  inpos {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  addUserKnob {26 ""}
+  addUserKnob {12 opos l "read output position"}
+  opos {{"mirx == 1 ? ( ( (inpos.x-(width/2))*(scalex+1)+offsetx*10 )*-1  )+(width/2) :  ((inpos.x-(width/2))*(scalex+1)+offsetx*10)+(width/2)"} {"miry == 1 ? (((inpos.y-(height/2))*(scaley+1)+offsety*10)*-1)+(height/2) :  ((inpos.y-(height/2))*(scaley+1)+offsety*10)+(height/2)"}}
+  addUserKnob {26 text l "" +STARTLINE T "read only!"}
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label " dynamic triggers "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos -3750
+  ypos -188
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote2
+  label " lens ghosts "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos -2637
+  ypos -184
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote4
+  label " boarder streaks "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos 123
+  ypos -161
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote5
+  label " vignette "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos 1246
+  ypos -159
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote10
+  label "dynamic center trigger used to control edge and center glows"
+  xpos -1276
+  ypos 300
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote11
+  label "FlareSuperStar used as dynamic mask (disabled exponential falloff inside the group)"
+  xpos 516
+  ypos 55
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote7
+  label " dynamic trigger example "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos -2174
+  ypos 233
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote6
+  label "dynamic center trigger used to fade out \nghosts at different times"
+  xpos -2175
+  ypos 294
+ }
+push $Nc7a69c10
+ Dot {
+  name Dot10
+  xpos -2775
+  ypos 876
+ }
+set N1eeb7890 [stack 0]
+ Dot {
+  name Dot22
+  xpos -2775
+  ypos 1558
+ }
+set Nc5b669a0 [stack 0]
+ Group {
+  name LookAt_2d1
+  xpos -2410
+  ypos 1554
+  addUserKnob {20 User l Controls}
+  addUserKnob {41 lookat l "look at" T LookAt_2d3.lookat}
+  addUserKnob {26 ""}
+  addUserKnob {41 translate T LookAt_2d3.translate}
+  addUserKnob {41 roffs l "rotation offset" T LookAt_2d3.roffs}
+  addUserKnob {41 rotate l "rotation (read only!)" T LookAt_2d3.rotate}
+  addUserKnob {41 scale T LookAt_2d3.scale}
+  addUserKnob {41 skewX l "skew X" T LookAt_2d3.skewX}
+  addUserKnob {41 skewY l "skew Y" T LookAt_2d3.skewY}
+  addUserKnob {41 skew_order l "skew order" T LookAt_2d3.skew_order}
+  addUserKnob {41 center T LookAt_2d3.center}
+  addUserKnob {41 invert_matrix l invert T LookAt_2d3.invert_matrix}
+  addUserKnob {41 filter T LookAt_2d3.filter}
+  addUserKnob {41 clamp -STARTLINE T LookAt_2d3.clamp}
+  addUserKnob {41 black_outside l "black outside" -STARTLINE T LookAt_2d3.black_outside}
+  addUserKnob {41 motionblur T LookAt_2d3.motionblur}
+  addUserKnob {41 shutter T LookAt_2d3.shutter}
+  addUserKnob {41 shutteroffset l "shutter offset" T LookAt_2d3.shutteroffset}
+  addUserKnob {41 shuttercustomoffset l "" -STARTLINE T LookAt_2d3.shuttercustomoffset}
+  addUserKnob {26 ""}
+  addUserKnob {26 "" -STARTLINE T "LookAt_2d v1.0\nby Lukas Fabian - March 2019"}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 821
+   ypos 420
+  }
+  Transform {
+   rotate {{degrees((atan2(center.x+translate.x-lookat.x,center.y+translate.y-lookat.y)*-1))+roffs}}
+   scale 2
+   center {{parent.parent.MirrorPosition2.opos} {parent.parent.MirrorPosition2.opos}}
+   filter Mitchell
+   name LookAt_2d3
+   xpos 821
+   ypos 487
+   addUserKnob {20 User l "Look At"}
+   addUserKnob {26 ""}
+   addUserKnob {12 lookat l "look at"}
+   lookat {{parent.parent.NoOp1.position_2d} {parent.parent.NoOp1.position_2d}}
+   addUserKnob {7 roffs l "rotation offset" R 0 360}
+   addUserKnob {26 ""}
+   addUserKnob {26 text l "" +STARTLINE T "LookAt_2d v1.0\nby Lukas Fabian - March 2019"}
+  }
+  Output {
+   name Output1
+   xpos 821
+   ypos 587
+  }
+ end_group
+ StickyNote {
+  inputs 0
+  name StickyNote9
+  label "mirror position used to specify the position of additional elements"
+  xpos -2216
+  ypos 884
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote12
+  label " lookAt_2d example "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos 1446
+  ypos 1284
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote13
+  label "lookAt_2d used to rotate mask to the opposite direction of the flare"
+  xpos 1445
+  ypos 1341
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote14
+  label "dynamic fade center vignette"
+  xpos 688
+  ypos 1472
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote16
+  label "dynamic fade boarder vignette"
+  xpos 1176
+  ypos 1651
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote17
+  label "dynamic fade"
+  xpos -2394
+  ypos 1216
+ }
+push $Nc7a69c10
+ NoOp {
+  name MirrorPosition1
+  xpos -2476
+  ypos 807
+  addUserKnob {20 User l Controls}
+  addUserKnob {7 offsetx l "static offset x" R -100 100}
+  addUserKnob {7 offsety l "static offset y" R -100 100}
+  offsety -1
+  addUserKnob {26 ""}
+  addUserKnob {7 scalex l "dynamic offset x" R -1 1}
+  scalex 0.325
+  addUserKnob {7 scaley l "dynamic offset y" R -1 1}
+  scaley -0.175
+  addUserKnob {6 mirx l "mirror x" +STARTLINE}
+  mirx true
+  addUserKnob {6 miry l "mirror y" -STARTLINE}
+  addUserKnob {20 tab l Positions}
+  addUserKnob {12 inpos l "input position"}
+  inpos {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  addUserKnob {26 ""}
+  addUserKnob {12 opos l "read output position"}
+  opos {{"mirx == 1 ? ( ( (inpos.x-(width/2))*(scalex+1)+offsetx*10 )*-1  )+(width/2) :  ((inpos.x-(width/2))*(scalex+1)+offsetx*10)+(width/2)"} {"miry == 1 ? (((inpos.y-(height/2))*(scaley+1)+offsety*10)*-1)+(height/2) :  ((inpos.y-(height/2))*(scaley+1)+offsety*10)+(height/2)"}}
+  addUserKnob {26 text l "" +STARTLINE T "read only!"}
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote8
+  label " mirror position example "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos -2219
+  ypos 821
+ }
+push $Nc5b669a0
+ NoOp {
+  name MirrorPosition2
+  xpos -2576
+  ypos 1586
+  addUserKnob {20 User l Controls}
+  addUserKnob {7 offsetx l "static offset x" R -100 100}
+  addUserKnob {7 offsety l "static offset y" R -100 100}
+  addUserKnob {26 ""}
+  addUserKnob {7 scalex l "dynamic offset x" R -1 1}
+  addUserKnob {7 scaley l "dynamic offset y" R -1 1}
+  addUserKnob {6 mirx l "mirror x" +STARTLINE}
+  mirx true
+  addUserKnob {6 miry l "mirror y" -STARTLINE}
+  miry true
+  addUserKnob {20 tab l Positions}
+  addUserKnob {12 inpos l "input position"}
+  inpos {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  addUserKnob {26 ""}
+  addUserKnob {12 opos l "read output position"}
+  opos {{"mirx == 1 ? ( ( (inpos.x-(width/2))*(scalex+1)+offsetx*10 )*-1  )+(width/2) :  ((inpos.x-(width/2))*(scalex+1)+offsetx*10)+(width/2)"} {"miry == 1 ? (((inpos.y-(height/2))*(scaley+1)+offsety*10)*-1)+(height/2) :  ((inpos.y-(height/2))*(scaley+1)+offsety*10)+(height/2)"}}
+  addUserKnob {26 text l "" +STARTLINE T "read only!"}
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote3
+  label " core "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos -779
+  ypos -145
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote19
+  label " FlareSuperStar examples "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos -569
+  ypos 38
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote15
+  label "dynamic fade boarder streaks"
+  xpos 3
+  ypos 277
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote18
+  label " combine it all "
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos -2194
+  ypos 1589
+ }
+push $Nc5b669a0
+ Group {
+  name FlareSuperStar4
+  xpos -2569
+  ypos 1654
+  addUserKnob {20 User l "Shape Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {26 _3 l "Global Controls"}
+  addUserKnob {41 mode t "the mode in which the tool operates.\nPosition: the flare gets generated at the defined position\nConvolve: the flare gets applied via a convolve of the input image\nOutput Kernel: outputs the kernel that would get feeded into the convolve so you could make further adjustetments and apply as your custom filter to your node of choice" T MasterControl.mode}
+  addUserKnob {41 center t "defines the center where the flare gets created if in position-mode." -STARTLINE T MasterControl.center}
+  addUserKnob {6 togglefix l "toggle to fix \"missing channel\" error caused by the convolve" t "Sometimes, when in convolve-mode, the tool gives a \"missing channel\" error. This is a dirty workaround to fix it. It might occure again, then toggle the checkbox again." +STARTLINE}
+  addUserKnob {41 multiply_1 l intensity t "global intensity" T MasterControl.multiply_1}
+  addUserKnob {41 gamma_2_1 l gamma t "global gamma" T MasterControl.gamma_2}
+  addUserKnob {41 scale t "changes the x and y scale of the flare around the center point." T MasterControl.scale}
+  addUserKnob {41 relativeradius l radius t "Controls the kernel size if in konvolve mode and the radius at which the flare will be zero if falloff to zero is enabled.\nThis is a factor of the image width." T MasterControl.relativeradius}
+  addUserKnob {26 ""}
+  addUserKnob {26 "" l "Ray Controls"}
+  addUserKnob {41 nr l "number of rays" t "Sets the number of rays that will be generated by the flare." T MasterControl.nr}
+  addUserKnob {41 gamma_4 l "odd ray length" t xfgjxfhjc T Grade5.gamma}
+  addUserKnob {26 text_3 l "" +STARTLINE T "doesn't actually change the length of the rays,\nbut applies a gamma correction"}
+  addUserKnob {41 rotation t "Controls the Rotation of the rays." T MasterControl.rotation}
+  addUserKnob {41 multiply_2 l "ray intensity" t "Controls intensity of the rays." T MasterControl.multiply_2}
+  addUserKnob {41 gamma_3 l "ray gamma" t "Controls the gamma of the rays." T MasterControl.gamma_3}
+  addUserKnob {41 thickness t "Lets you adjust the thickness of the rays." T MasterControl.thickness}
+  addUserKnob {41 multiply l softness t "Lets you control the softness of the rays." T MasterControl.multiply}
+  addUserKnob {41 coneangle l "Cone angle" t "Controls the angle of the rays." T MasterControl.coneangle}
+  addUserKnob {26 "" l "Spread Controls"}
+  addUserKnob {41 sdistn l "spread distance" t "Distance at which the spread will start. This is a factor of the global radius." T MasterControl.sdistn}
+  addUserKnob {26 text_2 l "" +STARTLINE T "The spread distance is a factor of the radius."}
+  addUserKnob {41 ssize l "spread angle" t "Spreads the rays via changing their angle from the spreaddistance outwards." T MasterControl.ssize}
+  addUserKnob {41 sthk l "spread thickness" t "Changes the thickness of the rays from the spreaddistance outwards." T MasterControl.sthk}
+  addUserKnob {41 sfotype l "spread falloff type" t "Lets you choose between a linear or an exponential falloff of the spread." T MasterControl.sfotype}
+  addUserKnob {41 gamma l "" t "Gamma control for the spread falloff." -STARTLINE T MasterControl.gamma}
+  addUserKnob {26 ""}
+  addUserKnob {41 boolean l "Enable inner Glow" T MasterControl.boolean}
+  addUserKnob {41 boolean_2 l "Enable Glare" T MasterControl.boolean_2}
+  addUserKnob {41 boolean_1 l "Crop convolve" t "Crops the result to the image format in convolve mode to reduce boundingbox size." T MasterControl.boolean_1}
+  addUserKnob {26 ""}
+  addUserKnob {26 _1 l "" +STARTLINE T "FlareSuperStar v1.2\nby Lukas Fabian - December 2020"}
+  addUserKnob {20 tab l "Glare Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {41 Intensity l intensity t "Controls intensity of the glare." T NoiseControl.Intensity}
+  addUserKnob {41 gamma_1_1 l gamma t "Controls gamma of the glare." T NoiseControl.gamma_1}
+  addUserKnob {26 ""}
+  addUserKnob {41 detail t "Controls the ray detail of the glare." T NoiseControl.detail}
+  addUserKnob {41 z1 l z t "zOffset for the ray-detail." T NoiseControl.z1}
+  addUserKnob {41 detail_1 l detail2 t "Controls additional detail for the rays outwards." T NoiseControl2.detail}
+  addUserKnob {41 z1_1 l z2 t "zOffset for detail2." T NoiseControl2.z1}
+  addUserKnob {41 sfix l "Enable seam fix" t "If disabled there could be a visible 0-1 in the glare. Also changes the bottom part of the glare appearence. Just try which setting suits your situation." T NoiseControl.sfix}
+  addUserKnob {26 ""}
+  addUserKnob {41 speed l "shimmer speed" t "If set to anything bigger then zero the glare will shimmer over time. The bigger the value the faster the shimmer." T NoiseControl.speed}
+  addUserKnob {41 posspeed l "position change speed" t "Only works properly in position-mode.\nIf the center-position of the flare is changed, the glare will change its shape.\nThe higher the number the bigger the change. If it´s set to zero there won´t be any change in the glare due to position changes." T NoiseControl.posspeed}
+  addUserKnob {20 tab_1 l "Glow Controls"}
+  addUserKnob {26 _2 l "" +STARTLINE}
+  addUserKnob {41 multiply_3 l "glow intensity" t "Controls the intensity of the glow." T Grade16.multiply}
+  addUserKnob {41 gamma_2 l "glow gamma" t "Controls the gamma of the glow." T Grade16.gamma}
+  addUserKnob {20 fotz l "Falloff to Zero"}
+  addUserKnob {26 ""}
+  addUserKnob {26 text l "" +STARTLINE T "If \"falloff to zero\" is enabled, the flare will be zero at the point defined by \nthe global radius. If \"fall off to zero\" is disabled it results in an inverse square\nfalloff, this might introduce edges in convolve-mode.\n\nUsually you want to have it on in convolve-mode, and off in position mode.\n\n"}
+  addUserKnob {26 text_1 l "Falloff to Zero"}
+  addUserKnob {41 fo l "enable in position mode" T MasterControl.fo}
+  addUserKnob {41 focm l "enable in convolve mode" T MasterControl.focm}
+  addUserKnob {41 fotype l "falloff type" t "Lets you choose between a linear or an exponential falloff." T MasterControl.fotype}
+  addUserKnob {41 gamma_1 l "" t "Gammacontrol for the falloff." -STARTLINE T MasterControl.gamma_1}
+  addUserKnob {26 ""}
+ }
+  BackdropNode {
+   inputs 0
+   name BackdropNode1
+   tile_color 0x71c67100
+   label Controlers
+   note_font_size 42
+   xpos 2321
+   ypos -1190
+   bdwidth 855
+   bdheight 322
+  }
+  Grade {
+   inputs 0
+   multiply {{lerp(10,1,parent.parent.Dynamic_Trigger1.botriggerlin)}}
+   black_clamp false
+   name AngleControl
+   xpos 2440
+   ypos -1028
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote4
+   label "   create glare    "
+   note_font_size 40
+   xpos -1067
+   ypos -10
+  }
+  Grade {
+   inputs 0
+   black_clamp false
+   name ARControl
+   xpos 2697
+   ypos -1029
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/150)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl
+   xpos 2824
+   ypos -1028
+   addUserKnob {20 User l Controls}
+   addUserKnob {7 z1 l z}
+   z1 1
+   addUserKnob {7 speed l "shimmer speed" R 0 5}
+   speed 1
+   addUserKnob {7 detail}
+   detail 15
+   addUserKnob {41 Intensity l intensity T Grade3.multiply}
+   addUserKnob {41 gamma_1 l gamma T Grade4.gamma}
+   addUserKnob {7 posspeed l "position speed" R 0 5}
+   posspeed 1.5
+   addUserKnob {6 sfix l "Enable seam fix" +STARTLINE}
+   sfix true
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/100)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl2
+   xpos 2959
+   ypos -1034
+   addUserKnob {20 User l "z Controls"}
+   addUserKnob {7 z1 l z}
+   z1 1
+   addUserKnob {7 speed}
+   speed {{parent.NoiseControl.speed}}
+   addUserKnob {7 detail l detail2}
+   detail 10
+  }
+  Input {
+   inputs 0
+   name img
+   xpos 1386
+   ypos -1284
+  }
+  Dot {
+   name Dot19
+   xpos 1420
+   ypos -1215
+  }
+  Dot {
+   name Dot11
+   xpos 1420
+   ypos -1090
+  }
+set N43dbc6e0 [stack 0]
+  Dot {
+   name Dot18
+   xpos 1826
+   ypos -1090
+  }
+set N3825310 [stack 0]
+  NoOp {
+   name MasterControl
+   xpos 2579
+   ypos -1035
+   addUserKnob {20 User l Controls}
+   addUserKnob {26 _1 l "" +STARTLINE}
+   addUserKnob {26 _4 l "General Controls"}
+   addUserKnob {4 mode M {Position Convolve "Output Kernel" ""}}
+   addUserKnob {12 center -STARTLINE}
+   center {{parent.parent.MirrorPosition2.opos} {parent.parent.MirrorPosition2.opos}}
+   addUserKnob {41 multiply_1 l intensity T Grade14.multiply}
+   addUserKnob {41 gamma_2 l gamma T Grade14.gamma}
+   addUserKnob {3 nr l "number of rays"}
+   nr 1
+   addUserKnob {41 scale T Reformat3.scale}
+   addUserKnob {7 rotation R 0 360}
+   rotation {{parent.parent.LookAt_2d1.LookAt_2d3.rotate}}
+   addUserKnob {7 radius l "absolute radius" R 1 1000}
+   radius {{(width/8)*(relativeradius+0.0000001)}}
+   addUserKnob {7 relativeradius l radius R 0 10}
+   relativeradius 2
+   addUserKnob {4 fotype l "falloff type" M {linear exponential}}
+   fotype exponential
+   addUserKnob {41 gamma_1 l "" -STARTLINE T Grade12.gamma}
+   addUserKnob {6 fo l "disable falloff" +STARTLINE}
+   fo true
+   addUserKnob {6 focm l "enable in convolve mode" +STARTLINE}
+   focm true
+   addUserKnob {26 _2 l "" +STARTLINE}
+   addUserKnob {26 _5 l "Ray Controls"}
+   addUserKnob {41 multiply_2 l "ray intensity" T Grade15.multiply}
+   addUserKnob {41 gamma_3 l "ray gamma" T Grade15.gamma}
+   addUserKnob {7 thickness R -2 2}
+   addUserKnob {41 multiply l softness T Grade9.multiply}
+   addUserKnob {41 coneangle l "cone angle" T AngleControl.multiply}
+   addUserKnob {26 _3 l "" +STARTLINE}
+   addUserKnob {26 _6 l "Spread Controls"}
+   addUserKnob {7 sdist l "spread distance safe" R 0.0001 1}
+   sdist {{sdistn+0.000001}}
+   addUserKnob {7 sdistn l "spread distance"}
+   sdistn 0.04
+   addUserKnob {7 ssize l "spread angle" R -2 2}
+   ssize 0.12
+   addUserKnob {7 sthk l "spread thickness" R -2 2}
+   addUserKnob {4 sfotype l "spread falloff type" M {linear exponential}}
+   addUserKnob {41 gamma l "" -STARTLINE T Grade10.gamma}
+   addUserKnob {26 ""}
+   addUserKnob {6 boolean l "Enable inner Flare" +STARTLINE}
+   boolean true
+   addUserKnob {6 boolean_2 l "enable glare" +STARTLINE}
+   boolean_2 true
+   addUserKnob {6 boolean_1 l "Crop convolve" +STARTLINE}
+   boolean_1 true
+  }
+  Reformat {
+   inputs 0
+   format "1024 1024 0 0 1024 1024 1 square_1K"
+   box_width 2000
+   filter Lanczos4
+   name Reformat1
+   xpos 716
+   ypos -1000
+  }
+  Dot {
+   name Dot7
+   xpos 750
+   ypos -937
+  }
+set Nc615d100 [stack 0]
+  Dot {
+   name Dot8
+   xpos -150
+   ypos -937
+  }
+  Dot {
+   name Dot10
+   xpos -150
+   ypos -421
+  }
+set N57db7280 [stack 0]
+  Dot {
+   name Dot20
+   xpos -150
+   ypos 96
+  }
+set N7efd21b0 [stack 0]
+  Dot {
+   name Dot16
+   xpos -150
+   ypos 402
+  }
+set N7efd7000 [stack 0]
+  Dot {
+   name Dot9
+   xpos -150
+   ypos 550
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 radius
+   temp_expr2 (width/2)-10
+   expr0 "(radius - sqrt(  pow2(x-centerx)+pow2(y-centery)  )  ) / radius"
+   name Expression13
+   xpos 26
+   ypos 546
+  }
+push $N43dbc6e0
+  Dot {
+   name Dot12
+   xpos -17
+   ypos -1090
+  }
+  Shuffle {
+   red black
+   green black
+   blue black
+   alpha black
+   name Shuffle5
+   label "\[value in]"
+   xpos -51
+   ypos -1005
+  }
+  Dot {
+   name Dot13
+   xpos -17
+   ypos -893
+  }
+set N6d8c04e0 [stack 0]
+  Dot {
+   name Dot14
+   xpos -17
+   ypos -510
+  }
+set N6d8c5330 [stack 0]
+  Dot {
+   name Dot6
+   xpos -17
+   ypos 174
+  }
+set N784cc110 [stack 0]
+  Dot {
+   name Dot1
+   xpos -17
+   ypos 381
+  }
+set N784d0f60 [stack 0]
+  Dot {
+   name Dot15
+   xpos -17
+   ypos 483
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   temp_name3 sw
+   temp_expr3 parent.MasterControl.scale.0
+   expr0 "(radius - sqrt(  pow2((x-centerx)*(1/sw))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  )  ) / radius"
+   name Expression8
+   xpos 197
+   ypos 478
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.mode}}
+   name Switch3
+   xpos 197
+   ypos 564
+  }
+  Grade {
+   name Grade20
+   xpos 197
+   ypos 604
+  }
+set N71af8100 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression9
+   xpos 117
+   ypos 650
+  }
+  Dot {
+   name Dot4
+   label expo
+   xpos 151
+   ypos 691
+  }
+push $N71af8100
+  Dot {
+   name Dot37
+   xpos 338
+   ypos 650
+  }
+  Dot {
+   name Dot5
+   label linear
+   xpos 338
+   ypos 686
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.fotype}}
+   name Switch1
+   xpos 201
+   ypos 720
+  }
+  Grade {
+   black_clamp false
+   name Grade12
+   xpos 201
+   ypos 775
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle8
+   label "\[value in]"
+   xpos 201
+   ypos 812
+  }
+  Dot {
+   name Dot32
+   xpos 235
+   ypos 962
+  }
+set N3b392100 [stack 0]
+  Dot {
+   name Dot41
+   xpos 235
+   ypos 1011
+  }
+push $N7efd7000
+  Dot {
+   name Dot39
+   xpos 480
+   ypos 402
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 512
+   temp_name1 centery
+   temp_expr1 512
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   expr0 "sqrt(  pow2((x/width*1024)-centerx)+pow2((y/height*1024)-centery) )"
+   name Expression28
+   xpos 446
+   ypos 526
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression29
+   xpos 446
+   ypos 568
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge10
+   xpos 446
+   ypos 1007
+   disable {{1-parent.MasterControl.focm}}
+  }
+  Dot {
+   name Dot40
+   xpos 480
+   ypos 1070
+  }
+push $N3b392100
+push $N784d0f60
+  Dot {
+   name Dot38
+   xpos 608
+   ypos 381
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x/width*1920
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y/height*1080
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt(  pow2(((x/width*1920)-centerx)*(1/sw))+pow2(((y/height*1080)-centery)*(1/sh)) )"
+   name Expression2
+   xpos 574
+   ypos 501
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression3
+   xpos 574
+   ypos 544
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge3
+   xpos 574
+   ypos 958
+   disable {{1-parent.MasterControl.fo}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch10
+   xpos 574
+   ypos 1066
+  }
+  Grade {
+   multiply 1000
+   black_clamp false
+   name Grade1
+   xpos 574
+   ypos 1189
+  }
+  Clamp {
+   maximum 2000
+   name Clamp1
+   xpos 574
+   ypos 1237
+  }
+  Dot {
+   name Dot21
+   xpos 608
+   ypos 1358
+  }
+set N57eb6a20 [stack 0]
+  Grade {
+   black_clamp false
+   name Grade4
+   xpos -675
+   ypos 1354
+  }
+push $N7efd21b0
+  Dot {
+   name Dot24
+   xpos -656
+   ypos 96
+  }
+  Dot {
+   name Dot22
+   xpos -1105
+   ypos 96
+  }
+set N3726760 [stack 0]
+  Dot {
+   name Dot29
+   xpos -1739
+   ypos 186
+  }
+set N704f4ca0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression24
+   xpos -1691
+   ypos 262
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression25
+   xpos -1691
+   ypos 326
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade11
+   xpos -1691
+   ypos 412
+  }
+push $N704f4ca0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )) / (pi*2)"
+   name Expression26
+   xpos -1859
+   ypos 254
+  }
+  Dot {
+   name Dot33
+   xpos -1825
+   ypos 510
+  }
+push $N3726760
+  Dot {
+   name Dot25
+   xpos -1105
+   ypos 283
+  }
+set Nfe5210d0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   expr0 "atan(x - centerx , y - centery)/pi"
+   name Expression15
+   xpos -1139
+   ypos 451
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy3
+   xpos -1139
+   ypos 500
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Dot {
+   name Dot27
+   xpos -1105
+   ypos 552
+  }
+push $N784cc110
+  Dot {
+   name Dot23
+   xpos -935
+   ypos 174
+  }
+set Ncfef0960 [stack 0]
+  Dot {
+   name Dot28
+   xpos -1351
+   ypos 186
+  }
+set Ncfef5a40 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression21
+   xpos -1303
+   ypos 258
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression22
+   xpos -1303
+   ypos 308
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade6
+   xpos -1303
+   ypos 355
+  }
+push $Ncfef5a40
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )  ) / (pi*2)"
+   name Expression23
+   xpos -1474
+   ypos 252
+  }
+  Dot {
+   name Dot34
+   xpos -1440
+   ypos 428
+  }
+push $Ncfef0960
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression4
+   xpos -969
+   ypos 377
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy2
+   xpos -969
+   ypos 418
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch5
+   xpos -969
+   ypos 548
+  }
+set Ncfcf7930 [stack 0]
+push $Nfe5210d0
+  Expression {
+   temp_name0 cx
+   temp_expr0 width/2
+   temp_name1 cy
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression16
+   xpos -756
+   ypos 408
+  }
+push $Ncfef0960
+  Dot {
+   name Dot26
+   xpos -612
+   ypos 266
+  }
+  Expression {
+   temp_name0 cx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 cy
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression19
+   xpos -646
+   ypos 408
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch9
+   xpos -646
+   ypos 475
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy1
+   xpos -646
+   ypos 542
+  }
+set Nfdf20a30 [stack 0]
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset+3, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression20
+   xpos -393
+   ypos 604
+  }
+push $Nfdf20a30
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r-g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression18
+   xpos -530
+   ypos 607
+  }
+push $Nfdf20a30
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r+g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression17
+   xpos -646
+   ypos 610
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge8
+   xpos -605
+   ypos 660
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge9
+   xpos -605
+   ypos 709
+  }
+  Dot {
+   name Dot35
+   xpos -571
+   ypos 781
+  }
+push $Ncfcf7930
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/width))*2*parent.NoiseControl.posspeed
+   expr0 "fBm(r*parent.NoiseControl.detail , y, parent.NoiseControl.zoffset, oct, lac, gain)"
+   name Expression14
+   xpos -969
+   ypos 623
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge7
+   xpos -969
+   ypos 777
+  }
+  Grade {
+   name Grade2
+   xpos -969
+   ypos 869
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge4
+   xpos -969
+   ypos 1354
+  }
+  Clamp {
+   maximum 2000
+   name Clamp2
+   xpos -969
+   ypos 1511
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle7
+   label "\[value in]"
+   xpos -969
+   ypos 1576
+  }
+  Grade {
+   multiply 0
+   black_clamp false
+   name Grade3
+   xpos -969
+   ypos 1635
+  }
+  Dot {
+   name Dot30
+   xpos -935
+   ypos 1921
+  }
+push $N57eb6a20
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle6
+   label "\[value in]"
+   xpos 574
+   ypos 1515
+  }
+  Grade {
+   multiply 0
+   black_clamp false
+   name Grade16
+   xpos 574
+   ypos 1588
+  }
+  Dot {
+   name Dot31
+   xpos 608
+   ypos 1687
+  }
+push $N57eb6a20
+push $N57db7280
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 spdist
+   temp_expr2 (width/2-10)*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2(x-centerx)+pow2(y-centery)  ) -spdist ) / spdist"
+   name Expression11
+   xpos 156
+   ypos -377
+  }
+push $N6d8c5330
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 spdist
+   temp_expr2 parent.MasterControl.radius*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2((x-centerx)*(1/parent.MasterControl.scale.0))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  ) -spdist ) / spdist"
+   name Expression6
+   xpos 334
+   ypos -403
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch4
+   xpos 334
+   ypos -368
+  }
+  Grade {
+   name Grade8
+   xpos 334
+   ypos -323
+  }
+set Nf9ff7d60 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression7
+   xpos 254
+   ypos -279
+  }
+  Dot {
+   name Dot3
+   label expo
+   xpos 288
+   ypos -241
+  }
+push $Nf9ff7d60
+  Dot {
+   name Dot2
+   label linear
+   xpos 440
+   ypos -271
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.sfotype}}
+   name Switch7
+   xpos 343
+   ypos -206
+  }
+  Grade {
+   black_clamp false
+   name Grade10
+   xpos 343
+   ypos -172
+  }
+set Ncebfae30 [stack 0]
+  Grade {
+   multiply {{parent.MasterControl.sthk}}
+   black_clamp false
+   name Grade13
+   xpos 343
+   ypos -117
+  }
+set Nceafbc30 [stack 0]
+push $Ncebfae30
+push $Nc615d100
+  Dot {
+   name Dot42
+   xpos 750
+   ypos -822
+  }
+set Nfd81cf70 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r+(2*pi/nr))  *(nr/2))"
+   name Expression30
+   xpos 730
+   ypos -726
+  }
+push $N6d8c04e0
+  Dot {
+   name Dot36
+   xpos 981
+   ypos -893
+  }
+set Nfd7202f0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r+(2*pi/nr))  * (nr/2))"
+   name Expression12
+   xpos 1026
+   ypos -809
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch11
+   xpos 1026
+   ypos -658
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression32
+   xpos 1026
+   ypos -588
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy6
+   xpos 1026
+   ypos -110
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression34
+   xpos 1026
+   ypos -21
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge14
+   xpos 1026
+   ypos 37
+  }
+  Grade {
+   blackpoint {{Grade9.blackpoint}}
+   blackpoint_panelDropped {{Grade9.blackpoint_panelDropped}}
+   whitepoint {{Grade9.whitepoint}}
+   whitepoint_panelDropped {{Grade9.whitepoint_panelDropped}}
+   black {{Grade9.black}}
+   black_panelDropped {{Grade9.black_panelDropped}}
+   white {{Grade9.white}}
+   white_panelDropped {{Grade9.white_panelDropped}}
+   multiply {{Grade9.multiply}}
+   multiply_panelDropped {{Grade9.multiply_panelDropped}}
+   add {{Grade9.add}}
+   add_panelDropped {{Grade9.add_panelDropped}}
+   gamma {{Grade9.gamma}}
+   gamma_panelDropped {{Grade9.gamma_panelDropped}}
+   reverse {{Grade9.reverse}}
+   black_clamp {{Grade9.black_clamp}}
+   white_clamp {{Grade9.white_clamp}}
+   inject {{Grade9.inject}}
+   invert_mask {{Grade9.invert_mask}}
+   fringe {{Grade9.fringe}}
+   process_mask {{Grade9.process_mask}}
+   invert_unpremult {{Grade9.invert_unpremult}}
+   enable_mix_luminance {{Grade9.enable_mix_luminance}}
+   mix_luminance {{Grade9.mix_luminance}}
+   mix {{Grade9.mix}}
+   name Grade19
+   xpos 1026
+   ypos 116
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge2
+   xpos 1046
+   ypos 1309
+  }
+  Grade {
+   name Grade5
+   label "odd ray grade"
+   xpos 1046
+   ypos 1372
+  }
+push $N57eb6a20
+push $Nceafbc30
+push $Ncebfae30
+push $Nfd81cf70
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r)  * (nr/2))"
+   name Expression1
+   xpos 564
+   ypos -716
+  }
+push $Nfd7202f0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r)  * (nr/2))"
+   name Expression5
+   xpos 838
+   ypos -807
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch8
+   xpos 838
+   ypos -653
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression31
+   xpos 838
+   ypos -583
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy5
+   xpos 838
+   ypos -178
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression33
+   xpos 838
+   ypos -89
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge13
+   xpos 838
+   ypos -33
+  }
+  Grade {
+   add {{parent.MasterControl.thickness}}
+   white_clamp true
+   name Grade9
+   xpos 838
+   ypos 81
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge1
+   xpos 838
+   ypos 1354
+  }
+  Merge2 {
+   inputs 2
+   operation max
+   name Merge11
+   xpos 923
+   ypos 1444
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle1
+   label "\[value in]"
+   xpos 923
+   ypos 1510
+  }
+  Grade {
+   black_clamp false
+   name Grade15
+   xpos 923
+   ypos 1592
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge6
+   xpos 923
+   ypos 1683
+   disable {{1-parent.MasterControl.boolean}}
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge5
+   xpos 923
+   ypos 1917
+   disable {{1-parent.MasterControl.boolean_2}}
+  }
+  Shuffle {
+   alpha black
+   name Shuffle2
+   label "\[value in]"
+   xpos 923
+   ypos 2293
+  }
+  Grade {
+   black_clamp false
+   name Grade14
+   xpos 923
+   ypos 2637
+  }
+  Dot {
+   name Dot17
+   xpos 957
+   ypos 2874
+  }
+set Ncd6fc180 [stack 0]
+  Transform {
+   scale {{parent.Reformat3.scale.0} {parent.Reformat3.scale.1}}
+   center {{width/2} {height/2}}
+   filter Mitchell
+   name Transform1
+   label scale
+   xpos 1096
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {1 1}
+   resize none
+   filter Lanczos4
+   name Reformat3
+   label "scale format"
+   xpos 1221
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {{parent.MasterControl.radius/200}}
+   filter Lanczos4
+   name Reformat2
+   label radius
+   xpos 1338
+   ypos 2864
+  }
+  Shuffle {
+   alpha white
+   name Shuffle4
+   label "\[value in]"
+   xpos 1448
+   ypos 2864
+  }
+set Ncd3ff0b0 [stack 0]
+push $Ncd3ff0b0
+  Shuffle {
+   alpha white
+   name Shuffle10
+   label "\[value in]"
+   xpos 1552
+   ypos 2864
+   disable {{parent.togglefix}}
+  }
+  Grade {
+   multiply 1e-05
+   black_clamp false
+   name Grade17
+   label normalize
+   xpos 1662
+   ypos 2864
+  }
+push $N3825310
+  Shuffle {
+   alpha white
+   name Shuffle3
+   label "\[value in]"
+   xpos 1792
+   ypos 2574
+  }
+  Convolve2 {
+   inputs 2
+   channels rgba
+   filter_channel rgba.red
+   use_input_channels true
+   normalize false
+   name Convolve1
+   xpos 1792
+   ypos 2870
+  }
+  Shuffle {
+   alpha black
+   name Shuffle9
+   label "\[value in]"
+   xpos 1792
+   ypos 2919
+  }
+  Crop {
+   box {0 0 {input.width} {input.height}}
+   name Crop1
+   xpos 1792
+   ypos 2993
+   disable {{1-parent.MasterControl.boolean_1}}
+  }
+push $Ncd6fc180
+  Switch {
+   inputs 3
+   which {{parent.Switch3.which}}
+   name Switch2
+   xpos 1380
+   ypos 3232
+  }
+  Output {
+   name Output1
+   xpos 1380
+   ypos 3336
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote1
+   label "   create rays    "
+   note_font_size 40
+   xpos 1188
+   ypos -730
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote2
+   label "    spread    "
+   note_font_size 40
+   xpos 1168
+   ypos -103
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote3
+   label "   create glow    "
+   note_font_size 40
+   xpos 642
+   ypos 592
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote5
+   label "    falloff to zero    "
+   note_font_size 40
+   xpos 117
+   ypos 1047
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote6
+   label "    convolve    "
+   note_font_size 40
+   xpos 1557
+   ypos 2747
+  }
+ end_group
+ Clamp {
+  maximum 0.13
+  name Clamp2
+  xpos -2569
+  ypos 1690
+ }
+ Grade {
+  multiply 0.2
+  name Grade14
+  xpos -2569
+  ypos 1728
+ }
+ TransformMasked {
+  channels {-rgba.red rgba.green -rgba.blue none}
+  scale 1.02
+  center {640 360}
+  shutteroffset centred
+  name Transform6
+  xpos -2569
+  ypos 1772
+ }
+ TransformMasked {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  scale 1.04
+  center {640 360}
+  shutteroffset centred
+  name Transform7
+  xpos -2569
+  ypos 1810
+ }
+ Blur {
+  size 20
+  name Blur8
+  label "size \[value size]"
+  xpos -2569
+  ypos 1854
+ }
+ Multiply {
+  value {{parent.Dynamic_Trigger1.botriggerlin}}
+  name Multiply8
+  label "\[value value]"
+  xpos -2569
+  ypos 1929
+ }
+push $N1eeb7890
+ Rectangle {
+  cliptype none
+  area {-320 -180 320 180}
+  name Rectangle1
+  xpos -2565
+  ypos 872
+ }
+set Nc11a4cb0 [stack 0]
+ Transform {
+  translate {{parent.MirrorPosition.opos} {parent.MirrorPosition.opos}}
+  scale {0.1 0.04}
+  shutteroffset centred
+  name Transform1
+  xpos -2634
+  ypos 928
+ }
+ Blur {
+  size {12 7}
+  name Blur5
+  label "size \[value size]"
+  xpos -2634
+  ypos 967
+ }
+ Grade {
+  white {0.3876666427 2.119057178 1.585954189 1}
+  multiply 0.01
+  name Grade5
+  xpos -2634
+  ypos 1021
+ }
+push $Nc11a4cb0
+ Transform {
+  translate {{parent.MirrorPosition1.opos} {parent.MirrorPosition1.opos}}
+  scale {0.1 0.02}
+  shutteroffset centred
+  name Transform2
+  xpos -2481
+  ypos 927
+ }
+ Blur {
+  size {12 7}
+  name Blur4
+  label "size \[value size]"
+  xpos -2481
+  ypos 973
+ }
+ Grade {
+  white {0.5190572143 0.3876666725 2.119057178 1}
+  multiply 0.1
+  name Grade4
+  xpos -2481
+  ypos 1023
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  name Merge6
+  xpos -2481
+  ypos 1069
+ }
+set Nc0baded0 [stack 0]
+ Transform {
+  scale {0.7 -0.5}
+  center {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  shutteroffset centred
+  name Transform3
+  xpos -2619
+  ypos 1133
+ }
+ Blur {
+  size 20
+  name Blur6
+  label "size \[value size]"
+  xpos -2619
+  ypos 1159
+ }
+push $Nc0baded0
+ Blur {
+  size {100 20}
+  name Blur7
+  label "size \[value size]"
+  xpos -2481
+  ypos 1101
+ }
+ Multiply {
+  value {{parent.Dynamic_Trigger.centtriggerexp}}
+  name Multiply1
+  label "\[value value]"
+  xpos -2481
+  ypos 1185
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  name Merge7
+  xpos -2481
+  ypos 1303
+ }
+push $Nc53606b0
+ Flare {
+  position {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  offset 0.1
+  radius {10.87 30.45 35.22}
+  size_mult 0.5
+  ring_color {0.05 0.00566667 0.00266667}
+  inner_color {0.04 0 0}
+  outer_falloff 2.5
+  inner_falloff {1 1 1}
+  chroma_spread 0.01
+  chroma_shift -2
+  brightness 0.34
+  corners 1
+  flattening 0.82
+  sharpness 0.73
+  corners_angle 5
+  asym_repeat 4
+  asym_multiplier 0.46
+  asym_falloff 3.8
+  asym_angle 20
+  mult_num 14
+  mult_seed 200
+  mult_offset 2
+  mult_size 0.99
+  mult_color 0.3
+  mult_color_seed 77097
+  mult_brightness -0.68
+  mult_brightness_seed 75027
+  mult_visibility 0.36
+  mult_flattening -0.39
+  mult_flattening_seed 45204
+  name Flare2
+  xpos -2504
+  ypos 358
+ }
+ Blur {
+  size 3
+  name Blur3
+  label "size \[value size]"
+  xpos -2504
+  ypos 393
+ }
+push $N72af4ce0
+ Flare {
+  position {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  offset 0.1
+  radius {10.87 30.45 35.22}
+  size_mult 0.35
+  ring_color {0.05 0.00566667 0.00266667}
+  inner_color {0.04 0 0}
+  outer_falloff {1 1 1}
+  inner_falloff {1 1 1}
+  chroma_spread 0.01
+  chroma_shift -2
+  brightness 0.3
+  vis_out 1
+  flattening 0.82
+  sharpness 0.73
+  corners_angle 5
+  mult_num 18
+  mult_seed 6
+  mult_offset 2
+  mult_size 0.99
+  mult_color 0.3
+  mult_color_seed 77097
+  mult_brightness -0.68
+  mult_brightness_seed 75027
+  mult_visibility 0.66
+  mult_flattening -0.39
+  mult_flattening_seed 45204
+  name Flare1
+  xpos -2511
+  ypos 147
+ }
+ Saturation {
+  saturation 0.42
+  name Saturation1
+  xpos -2511
+  ypos 173
+ }
+ Blur {
+  size 2
+  name Blur2
+  label "size \[value size]"
+  xpos -2511
+  ypos 199
+ }
+ Multiply {
+  value {{parent.Dynamic_Trigger1.centtriggerlin}}
+  name Multiply3
+  label "\[value value]"
+  xpos -2511
+  ypos 249
+ }
+push $N191aa100
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  name Merge1
+  xpos -2293
+  ypos 304
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  name Merge4
+  xpos -2293
+  ypos 471
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  Achannels rgb
+  name Merge5
+  xpos -2293
+  ypos 1326
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  Achannels rgb
+  name Merge16
+  xpos -2293
+  ypos 2023
+ }
+ Multiply {
+  name Multiply9
+  label "Ghosts intensity"
+  xpos -2293
+  ypos 2234
+ }
+ Dot {
+  name Dot6
+  xpos -2259
+  ypos 2366
+ }
+ Reformat {
+  inputs 0
+  format "1280 720 0 0 1280 720 1 HD_720"
+  name Reformat2
+  xpos 1300
+  ypos 941
+ }
+ Dot {
+  name Dot13
+  xpos 1334
+  ypos 1113
+ }
+set Nfce210d0 [stack 0]
+ Expression {
+  temp_name0 centerx
+  temp_expr0 width/2
+  temp_name1 centery
+  temp_expr1 height/2
+  temp_name2 nr
+  temp_expr2 3
+  temp_name3 r
+  temp_expr3 0
+  expr0 "cos(  (atan((x - centerx) , (y - centery))+r)  * (nr/2))"
+  name Expression12
+  label "simple mask"
+  xpos 1300
+  ypos 1242
+ }
+ Group {
+  name LookAt_2d
+  xpos 1300
+  ypos 1343
+  addUserKnob {20 User l Controls}
+  addUserKnob {41 lookat l "look at" T LookAt_2d3.lookat}
+  addUserKnob {26 ""}
+  addUserKnob {41 translate T LookAt_2d3.translate}
+  addUserKnob {41 roffs l "rotation offset" T LookAt_2d3.roffs}
+  addUserKnob {41 rotate l "rotation (read only!)" T LookAt_2d3.rotate}
+  addUserKnob {41 scale T LookAt_2d3.scale}
+  addUserKnob {41 skewX l "skew X" T LookAt_2d3.skewX}
+  addUserKnob {41 skewY l "skew Y" T LookAt_2d3.skewY}
+  addUserKnob {41 skew_order l "skew order" T LookAt_2d3.skew_order}
+  addUserKnob {41 center T LookAt_2d3.center}
+  addUserKnob {41 invert_matrix l invert T LookAt_2d3.invert_matrix}
+  addUserKnob {41 filter T LookAt_2d3.filter}
+  addUserKnob {41 clamp -STARTLINE T LookAt_2d3.clamp}
+  addUserKnob {41 black_outside l "black outside" -STARTLINE T LookAt_2d3.black_outside}
+  addUserKnob {41 motionblur T LookAt_2d3.motionblur}
+  addUserKnob {41 shutter T LookAt_2d3.shutter}
+  addUserKnob {41 shutteroffset l "shutter offset" T LookAt_2d3.shutteroffset}
+  addUserKnob {41 shuttercustomoffset l "" -STARTLINE T LookAt_2d3.shuttercustomoffset}
+  addUserKnob {26 ""}
+  addUserKnob {26 "" -STARTLINE T "LookAt_2d v1.0\nby Lukas Fabian - March 2019"}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 821
+   ypos 420
+  }
+  Transform {
+   rotate {{degrees((atan2(center.x+translate.x-lookat.x,center.y+translate.y-lookat.y)*-1))+roffs}}
+   scale 2
+   center {640 360}
+   filter Mitchell
+   name LookAt_2d3
+   xpos 821
+   ypos 487
+   addUserKnob {20 User l "Look At"}
+   addUserKnob {26 ""}
+   addUserKnob {12 lookat l "look at"}
+   lookat {{parent.parent.NoOp1.position_2d} {parent.parent.NoOp1.position_2d}}
+   addUserKnob {7 roffs l "rotation offset" R 0 360}
+   addUserKnob {26 ""}
+   addUserKnob {26 text l "" +STARTLINE T "LookAt_2d v1.0\nby Lukas Fabian - March 2019"}
+  }
+  Output {
+   name Output1
+   xpos 821
+   ypos 587
+  }
+ end_group
+ Clamp {
+  name Clamp1
+  xpos 1300
+  ypos 1416
+ }
+ Crop {
+  box {0 0 1280 720}
+  name Crop1
+  xpos 1300
+  ypos 1454
+ }
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle1
+  tile_color 0xbf0000ff
+  label "\[value in]"
+  xpos 1300
+  ypos 1506
+ }
+push $Nfce210d0
+ Radial {
+  area {1408 939 -127 -218}
+  name Radial1
+  xpos 978
+  ypos 1190
+ }
+ Invert {
+  name Invert1
+  xpos 978
+  ypos 1232
+ }
+ Grade {
+  gamma 0.2
+  name Grade6
+  xpos 978
+  ypos 1277
+ }
+ Transform {
+  scale {1.2 1.5}
+  center {640 360}
+  shutteroffset centred
+  name Transform4
+  xpos 978
+  ypos 1325
+ }
+ Grade {
+  white {1.183333278 1.033333302 0.7833333015 1}
+  multiply 0.05
+  name Grade7
+  xpos 978
+  ypos 1362
+ }
+set Nbf4a5ac0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge13
+  xpos 1066
+  ypos 1571
+ }
+ Multiply {
+  value {{parent.Dynamic_Trigger2.botriggerexp}}
+  name Multiply7
+  label "\[value value]"
+  xpos 1066
+  ypos 1640
+ }
+ Dot {
+  name Dot19
+  xpos 1100
+  ypos 1788
+ }
+push $Nbf4a5ac0
+ Multiply {
+  value {{parent.Dynamic_Trigger.centtriggerlin}}
+  name Multiply2
+  label "\[value value]"
+  xpos 871
+  ypos 1455
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  Achannels rgb
+  name Merge14
+  xpos 871
+  ypos 1784
+ }
+ Reformat {
+  format {{{parent.Reformat1.format}}}
+  name Reformat3
+  xpos 871
+  ypos 1847
+ }
+ Multiply {
+  name Multiply10
+  label "vignette intensity"
+  xpos 871
+  ypos 2025
+ }
+ Dot {
+  name Dot18
+  xpos 905
+  ypos 2160
+ }
+push $Nfce17330
+ Group {
+  name FlareSuperStar3
+  label mask
+  xpos 405
+  ypos 51
+  addUserKnob {20 User l "Shape Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {26 _3 l "Global Controls"}
+  addUserKnob {41 mode t "the mode in which the tool operates.\nPosition: the flare gets generated at the defined position\nConvolve: the flare gets applied via a convolve of the input image\nOutput Kernel: outputs the kernel that would get feeded into the convolve so you could make further adjustetments and apply as your custom filter to your node of choice" T MasterControl.mode}
+  addUserKnob {41 center t "defines the center where the flare gets created if in position-mode." -STARTLINE T MasterControl.center}
+  addUserKnob {6 togglefix l "toggle to fix \"missing channel\" error caused by the convolve" t "Sometimes, when in convolve-mode, the tool gives a \"missing channel\" error. This is a dirty workaround to fix it. It might occure again, then toggle the checkbox again." +STARTLINE}
+  addUserKnob {41 multiply_1 l intensity t "global intensity" T MasterControl.multiply_1}
+  addUserKnob {41 gamma_2_1 l gamma t "global gamma" T MasterControl.gamma_2}
+  addUserKnob {41 scale t "changes the x and y scale of the flare around the center point." T MasterControl.scale}
+  addUserKnob {41 relativeradius l radius t "Controls the kernel size if in konvolve mode and the radius at which the flare will be zero if falloff to zero is enabled.\nThis is a factor of the image width." T MasterControl.relativeradius}
+  addUserKnob {26 ""}
+  addUserKnob {26 "" l "Ray Controls"}
+  addUserKnob {41 nr l "number of rays" t "Sets the number of rays that will be generated by the flare." T MasterControl.nr}
+  addUserKnob {41 gamma_4 l "odd ray length" t xfgjxfhjc T Grade5.gamma}
+  addUserKnob {26 text_3 l "" +STARTLINE T "doesn't actually change the length of the rays,\nbut applies a gamma correction"}
+  addUserKnob {41 rotation t "Controls the Rotation of the rays." T MasterControl.rotation}
+  addUserKnob {41 multiply_2 l "ray intensity" t "Controls intensity of the rays." T MasterControl.multiply_2}
+  addUserKnob {41 gamma_3 l "ray gamma" t "Controls the gamma of the rays." T MasterControl.gamma_3}
+  addUserKnob {41 thickness t "Lets you adjust the thickness of the rays." T MasterControl.thickness}
+  addUserKnob {41 multiply l softness t "Lets you control the softness of the rays." T MasterControl.multiply}
+  addUserKnob {41 coneangle l "Cone angle" t "Controls the angle of the rays." T MasterControl.coneangle}
+  addUserKnob {26 "" l "Spread Controls"}
+  addUserKnob {41 sdistn l "spread distance" t "Distance at which the spread will start. This is a factor of the global radius." T MasterControl.sdistn}
+  addUserKnob {26 text_2 l "" +STARTLINE T "The spread distance is a factor of the radius."}
+  addUserKnob {41 ssize l "spread angle" t "Spreads the rays via changing their angle from the spreaddistance outwards." T MasterControl.ssize}
+  addUserKnob {41 sthk l "spread thickness" t "Changes the thickness of the rays from the spreaddistance outwards." T MasterControl.sthk}
+  addUserKnob {41 sfotype l "spread falloff type" t "Lets you choose between a linear or an exponential falloff of the spread." T MasterControl.sfotype}
+  addUserKnob {41 gamma l "" t "Gamma control for the spread falloff." -STARTLINE T MasterControl.gamma}
+  addUserKnob {26 ""}
+  addUserKnob {41 boolean l "Enable inner Glow" T MasterControl.boolean}
+  addUserKnob {41 boolean_2 l "Enable Glare" T MasterControl.boolean_2}
+  addUserKnob {41 boolean_1 l "Crop convolve" t "Crops the result to the image format in convolve mode to reduce boundingbox size." T MasterControl.boolean_1}
+  addUserKnob {26 ""}
+  addUserKnob {26 _1 l "" +STARTLINE T "FlareSuperStar v1.2\nby Lukas Fabian - December 2020"}
+  addUserKnob {20 tab l "Glare Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {41 Intensity l intensity t "Controls intensity of the glare." T NoiseControl.Intensity}
+  addUserKnob {41 gamma_1_1 l gamma t "Controls gamma of the glare." T NoiseControl.gamma_1}
+  addUserKnob {26 ""}
+  addUserKnob {41 detail t "Controls the ray detail of the glare." T NoiseControl.detail}
+  addUserKnob {41 z1 l z t "zOffset for the ray-detail." T NoiseControl.z1}
+  addUserKnob {41 detail_1 l detail2 t "Controls additional detail for the rays outwards." T NoiseControl2.detail}
+  addUserKnob {41 z1_1 l z2 t "zOffset for detail2." T NoiseControl2.z1}
+  addUserKnob {41 sfix l "Enable seam fix" t "If disabled there could be a visible 0-1 in the glare. Also changes the bottom part of the glare appearence. Just try which setting suits your situation." T NoiseControl.sfix}
+  addUserKnob {26 ""}
+  addUserKnob {41 speed l "shimmer speed" t "If set to anything bigger then zero the glare will shimmer over time. The bigger the value the faster the shimmer." T NoiseControl.speed}
+  addUserKnob {41 posspeed l "position change speed" t "Only works properly in position-mode.\nIf the center-position of the flare is changed, the glare will change its shape.\nThe higher the number the bigger the change. If it´s set to zero there won´t be any change in the glare due to position changes." T NoiseControl.posspeed}
+  addUserKnob {20 tab_1 l "Glow Controls"}
+  addUserKnob {26 _2 l "" +STARTLINE}
+  addUserKnob {41 multiply_3 l "glow intensity" t "Controls the intensity of the glow." T Grade16.multiply}
+  addUserKnob {41 gamma_2 l "glow gamma" t "Controls the gamma of the glow." T Grade16.gamma}
+  addUserKnob {20 fotz l "Falloff to Zero"}
+  addUserKnob {26 ""}
+  addUserKnob {26 text l "" +STARTLINE T "If \"falloff to zero\" is enabled, the flare will be zero at the point defined by \nthe global radius. If \"fall off to zero\" is disabled it results in an inverse square\nfalloff, this might introduce edges in convolve-mode.\n\nUsually you want to have it on in convolve-mode, and off in position mode.\n\n"}
+  addUserKnob {26 text_1 l "Falloff to Zero"}
+  addUserKnob {41 fo l "enable in position mode" T MasterControl.fo}
+  addUserKnob {41 focm l "enable in convolve mode" T MasterControl.focm}
+  addUserKnob {41 fotype l "falloff type" t "Lets you choose between a linear or an exponential falloff." T MasterControl.fotype}
+  addUserKnob {41 gamma_1 l "" t "Gammacontrol for the falloff." -STARTLINE T MasterControl.gamma_1}
+  addUserKnob {26 ""}
+ }
+  BackdropNode {
+   inputs 0
+   name BackdropNode1
+   tile_color 0x71c67100
+   label Controlers
+   note_font_size 42
+   xpos 2321
+   ypos -1190
+   bdwidth 855
+   bdheight 322
+  }
+  Grade {
+   inputs 0
+   multiply {{"lerp(10, 1, parent.parent.Dynamic_Trigger2.botriggerlin)"}}
+   black_clamp false
+   name AngleControl
+   xpos 2440
+   ypos -1028
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote4
+   label "   create glare    "
+   note_font_size 40
+   xpos -1067
+   ypos -10
+  }
+  Grade {
+   inputs 0
+   black_clamp false
+   name ARControl
+   xpos 2697
+   ypos -1029
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/150)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl
+   xpos 2824
+   ypos -1028
+   addUserKnob {20 User l Controls}
+   addUserKnob {7 z1 l z}
+   z1 4
+   addUserKnob {7 speed l "shimmer speed" R 0 5}
+   addUserKnob {7 detail}
+   detail 45
+   addUserKnob {41 Intensity l intensity T Grade3.multiply}
+   addUserKnob {41 gamma_1 l gamma T Grade4.gamma}
+   addUserKnob {7 posspeed l "position speed" R 0 5}
+   posspeed 2
+   addUserKnob {6 sfix l "Enable seam fix" +STARTLINE}
+   sfix true
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/100)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl2
+   xpos 2959
+   ypos -1034
+   addUserKnob {20 User l "z Controls"}
+   addUserKnob {7 z1 l z}
+   z1 9
+   addUserKnob {7 speed}
+   speed {{parent.NoiseControl.speed}}
+   addUserKnob {7 detail l detail2}
+   detail 130
+  }
+  Input {
+   inputs 0
+   name img
+   xpos 1386
+   ypos -1284
+  }
+  Dot {
+   name Dot19
+   xpos 1420
+   ypos -1215
+  }
+  Dot {
+   name Dot11
+   xpos 1420
+   ypos -1090
+  }
+set Nfc821f10 [stack 0]
+  Dot {
+   name Dot18
+   xpos 1826
+   ypos -1090
+  }
+set Nfc717100 [stack 0]
+  NoOp {
+   name MasterControl
+   xpos 2579
+   ypos -1035
+   addUserKnob {20 User l Controls}
+   addUserKnob {26 _1 l "" +STARTLINE}
+   addUserKnob {26 _4 l "General Controls"}
+   addUserKnob {4 mode M {Position Convolve "Output Kernel" ""}}
+   addUserKnob {12 center -STARTLINE}
+   center {{parent.parent.NoOp1.position_2d} {parent.parent.NoOp1.position_2d}}
+   addUserKnob {41 multiply_1 l intensity T Grade14.multiply}
+   addUserKnob {41 gamma_2 l gamma T Grade14.gamma}
+   addUserKnob {3 nr l "number of rays"}
+   nr 2
+   addUserKnob {41 scale T Reformat3.scale}
+   addUserKnob {7 rotation R 0 360}
+   rotation 90
+   addUserKnob {7 radius l "absolute radius" R 1 1000}
+   radius {{(width/8)*(relativeradius+0.0000001)}}
+   addUserKnob {7 relativeradius l radius R 0 10}
+   relativeradius 1
+   addUserKnob {4 fotype l "falloff type" M {linear exponential}}
+   fotype exponential
+   addUserKnob {41 gamma_1 l "" -STARTLINE T Grade12.gamma}
+   addUserKnob {6 fo l "disable falloff" +STARTLINE}
+   addUserKnob {6 focm l "enable in convolve mode" +STARTLINE}
+   focm true
+   addUserKnob {26 _2 l "" +STARTLINE}
+   addUserKnob {26 _5 l "Ray Controls"}
+   addUserKnob {41 multiply_2 l "ray intensity" T Grade15.multiply}
+   addUserKnob {41 gamma_3 l "ray gamma" T Grade15.gamma}
+   addUserKnob {7 thickness R -2 2}
+   thickness 0.17
+   addUserKnob {41 multiply l softness T Grade9.multiply}
+   addUserKnob {41 coneangle l "cone angle" T AngleControl.multiply}
+   addUserKnob {26 _3 l "" +STARTLINE}
+   addUserKnob {26 _6 l "Spread Controls"}
+   addUserKnob {7 sdist l "spread distance safe" R 0.0001 1}
+   sdist {{sdistn+0.000001}}
+   addUserKnob {7 sdistn l "spread distance"}
+   sdistn 0.185
+   addUserKnob {7 ssize l "spread angle" R -2 2}
+   addUserKnob {7 sthk l "spread thickness" R -2 2}
+   addUserKnob {4 sfotype l "spread falloff type" M {linear exponential}}
+   addUserKnob {41 gamma l "" -STARTLINE T Grade10.gamma}
+   addUserKnob {26 ""}
+   addUserKnob {6 boolean l "Enable inner Flare" +STARTLINE}
+   boolean true
+   addUserKnob {6 boolean_2 l "enable glare" +STARTLINE}
+   boolean_2 true
+   addUserKnob {6 boolean_1 l "Crop convolve" +STARTLINE}
+   boolean_1 true
+  }
+  Reformat {
+   inputs 0
+   format "1024 1024 0 0 1024 1024 1 square_1K"
+   box_width 2000
+   filter Lanczos4
+   name Reformat1
+   xpos 716
+   ypos -1000
+  }
+  Dot {
+   name Dot7
+   xpos 750
+   ypos -937
+  }
+set Nbea9fab0 [stack 0]
+  Dot {
+   name Dot8
+   xpos -150
+   ypos -937
+  }
+  Dot {
+   name Dot10
+   xpos -150
+   ypos -421
+  }
+set Nbeaa95e0 [stack 0]
+  Dot {
+   name Dot20
+   xpos -150
+   ypos 96
+  }
+set Nbeaae430 [stack 0]
+  Dot {
+   name Dot16
+   xpos -150
+   ypos 402
+  }
+set Nbe9a3390 [stack 0]
+  Dot {
+   name Dot9
+   xpos -150
+   ypos 550
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 radius
+   temp_expr2 (width/2)-10
+   expr0 "(radius - sqrt(  pow2(x-centerx)+pow2(y-centery)  )  ) / radius"
+   name Expression13
+   xpos 26
+   ypos 546
+  }
+push $Nfc821f10
+  Dot {
+   name Dot12
+   xpos -17
+   ypos -1090
+  }
+  Shuffle {
+   red black
+   green black
+   blue black
+   alpha black
+   name Shuffle5
+   label "\[value in]"
+   xpos -51
+   ypos -1005
+  }
+  Dot {
+   name Dot13
+   xpos -17
+   ypos -893
+  }
+set Nfc518f10 [stack 0]
+  Dot {
+   name Dot14
+   xpos -17
+   ypos -510
+  }
+set Nfc51dc90 [stack 0]
+  Dot {
+   name Dot6
+   xpos -17
+   ypos 174
+  }
+set Nfc522ae0 [stack 0]
+  Dot {
+   name Dot1
+   xpos -17
+   ypos 381
+  }
+set Nfc417a40 [stack 0]
+  Dot {
+   name Dot15
+   xpos -17
+   ypos 483
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   temp_name3 sw
+   temp_expr3 parent.MasterControl.scale.0
+   expr0 "(radius - sqrt(  pow2((x-centerx)*(1/sw))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  )  ) / radius"
+   name Expression8
+   xpos 197
+   ypos 478
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.mode}}
+   name Switch3
+   xpos 197
+   ypos 564
+  }
+  Grade {
+   name Grade20
+   xpos 197
+   ypos 604
+  }
+set Nfc2180b0 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression9
+   xpos 117
+   ypos 650
+  }
+  Dot {
+   name Dot4
+   label expo
+   xpos 151
+   ypos 691
+  }
+push $Nfc2180b0
+  Dot {
+   name Dot37
+   xpos 338
+   ypos 650
+  }
+  Dot {
+   name Dot5
+   label linear
+   xpos 338
+   ypos 686
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.fotype}}
+   name Switch1
+   xpos 201
+   ypos 720
+  }
+  Grade {
+   black_clamp false
+   name Grade12
+   xpos 201
+   ypos 775
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle8
+   label "\[value in]"
+   xpos 201
+   ypos 812
+  }
+  Dot {
+   name Dot32
+   xpos 235
+   ypos 962
+  }
+set Nbe2a7690 [stack 0]
+  Dot {
+   name Dot41
+   xpos 235
+   ypos 1011
+  }
+push $Nbe9a3390
+  Dot {
+   name Dot39
+   xpos 480
+   ypos 402
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 512
+   temp_name1 centery
+   temp_expr1 512
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   expr0 "sqrt(  pow2((x/width*1024)-centerx)+pow2((y/height*1024)-centery) )"
+   name Expression28
+   xpos 446
+   ypos 526
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression29
+   xpos 446
+   ypos 568
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge10
+   xpos 446
+   ypos 1007
+   disable {{1-parent.MasterControl.focm}}
+  }
+  Dot {
+   name Dot40
+   xpos 480
+   ypos 1070
+  }
+push $Nbe2a7690
+push $Nfc417a40
+  Dot {
+   name Dot38
+   xpos 608
+   ypos 381
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x/width*1920
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y/height*1080
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt(  pow2(((x/width*1920)-centerx)*(1/sw))+pow2(((y/height*1080)-centery)*(1/sh)) )"
+   name Expression2
+   xpos 574
+   ypos 501
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression3
+   xpos 574
+   ypos 544
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge3
+   xpos 574
+   ypos 958
+   disable {{1-parent.MasterControl.fo}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch10
+   xpos 574
+   ypos 1066
+  }
+  Grade {
+   multiply 1000
+   black_clamp false
+   name Grade1
+   xpos 574
+   ypos 1189
+  }
+  Clamp {
+   maximum 2000
+   name Clamp1
+   xpos 574
+   ypos 1237
+  }
+  Dot {
+   name Dot21
+   xpos 608
+   ypos 1358
+  }
+set Nfbc1a4c0 [stack 0]
+  Grade {
+   gamma 1.2
+   black_clamp false
+   name Grade4
+   xpos -675
+   ypos 1354
+  }
+push $Nbeaae430
+  Dot {
+   name Dot24
+   xpos -656
+   ypos 96
+  }
+  Dot {
+   name Dot22
+   xpos -1105
+   ypos 96
+  }
+set Nfbb24a90 [stack 0]
+  Dot {
+   name Dot29
+   xpos -1739
+   ypos 186
+  }
+set Nfba19fe0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression24
+   xpos -1691
+   ypos 262
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression25
+   xpos -1691
+   ypos 326
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade11
+   xpos -1691
+   ypos 412
+  }
+push $Nfba19fe0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )) / (pi*2)"
+   name Expression26
+   xpos -1859
+   ypos 254
+  }
+  Dot {
+   name Dot33
+   xpos -1825
+   ypos 510
+  }
+push $Nfbb24a90
+  Dot {
+   name Dot25
+   xpos -1105
+   ypos 283
+  }
+set Nbdaa7380 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   expr0 "atan(x - centerx , y - centery)/pi"
+   name Expression15
+   xpos -1139
+   ypos 451
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy3
+   xpos -1139
+   ypos 500
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Dot {
+   name Dot27
+   xpos -1105
+   ypos 552
+  }
+push $Nfc522ae0
+  Dot {
+   name Dot23
+   xpos -935
+   ypos 174
+  }
+set Nfb825a40 [stack 0]
+  Dot {
+   name Dot28
+   xpos -1351
+   ypos 186
+  }
+set Nfb71ad20 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression21
+   xpos -1303
+   ypos 258
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression22
+   xpos -1303
+   ypos 308
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade6
+   xpos -1303
+   ypos 355
+  }
+push $Nfb71ad20
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )  ) / (pi*2)"
+   name Expression23
+   xpos -1474
+   ypos 252
+  }
+  Dot {
+   name Dot34
+   xpos -1440
+   ypos 428
+  }
+push $Nfb825a40
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression4
+   xpos -969
+   ypos 377
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy2
+   xpos -969
+   ypos 418
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch5
+   xpos -969
+   ypos 548
+  }
+set Nfb41cc20 [stack 0]
+push $Nbdaa7380
+  Expression {
+   temp_name0 cx
+   temp_expr0 width/2
+   temp_name1 cy
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression16
+   xpos -756
+   ypos 408
+  }
+push $Nfb825a40
+  Dot {
+   name Dot26
+   xpos -612
+   ypos 266
+  }
+  Expression {
+   temp_name0 cx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 cy
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression19
+   xpos -646
+   ypos 408
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch9
+   xpos -646
+   ypos 475
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy1
+   xpos -646
+   ypos 542
+  }
+set Nbd5a6df0 [stack 0]
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset+3, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression20
+   xpos -393
+   ypos 604
+  }
+push $Nbd5a6df0
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r-g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression18
+   xpos -530
+   ypos 607
+  }
+push $Nbd5a6df0
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r+g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression17
+   xpos -646
+   ypos 610
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge8
+   xpos -605
+   ypos 660
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge9
+   xpos -605
+   ypos 709
+  }
+  Dot {
+   name Dot35
+   xpos -571
+   ypos 781
+  }
+push $Nfb41cc20
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/width))*2*parent.NoiseControl.posspeed
+   expr0 "fBm(r*parent.NoiseControl.detail , y, parent.NoiseControl.zoffset, oct, lac, gain)"
+   name Expression14
+   xpos -969
+   ypos 623
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge7
+   xpos -969
+   ypos 777
+  }
+  Grade {
+   name Grade2
+   xpos -969
+   ypos 869
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge4
+   xpos -969
+   ypos 1354
+  }
+  Clamp {
+   maximum 2000
+   name Clamp2
+   xpos -969
+   ypos 1511
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle7
+   label "\[value in]"
+   xpos -969
+   ypos 1576
+  }
+  Grade {
+   multiply 0
+   black_clamp false
+   name Grade3
+   xpos -969
+   ypos 1635
+  }
+  Dot {
+   name Dot30
+   xpos -935
+   ypos 1921
+  }
+push $Nfbc1a4c0
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle6
+   label "\[value in]"
+   xpos 574
+   ypos 1515
+  }
+  Grade {
+   multiply 0
+   black_clamp false
+   name Grade16
+   xpos 574
+   ypos 1588
+  }
+  Dot {
+   name Dot31
+   xpos 608
+   ypos 1687
+  }
+push $Nfbc1a4c0
+push $Nbeaa95e0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 spdist
+   temp_expr2 (width/2-10)*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2(x-centerx)+pow2(y-centery)  ) -spdist ) / spdist"
+   name Expression11
+   xpos 156
+   ypos -377
+  }
+push $Nfc51dc90
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 spdist
+   temp_expr2 parent.MasterControl.radius*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2((x-centerx)*(1/parent.MasterControl.scale.0))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  ) -spdist ) / spdist"
+   name Expression6
+   xpos 334
+   ypos -403
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch4
+   xpos 334
+   ypos -368
+  }
+  Grade {
+   name Grade8
+   xpos 334
+   ypos -323
+  }
+set Nbc6a7030 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression7
+   xpos 254
+   ypos -279
+  }
+  Dot {
+   name Dot3
+   label expo
+   xpos 288
+   ypos -241
+  }
+push $Nbc6a7030
+  Dot {
+   name Dot2
+   label linear
+   xpos 440
+   ypos -271
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.sfotype}}
+   name Switch7
+   xpos 343
+   ypos -206
+  }
+  Grade {
+   black_clamp false
+   name Grade10
+   xpos 343
+   ypos -172
+  }
+set Nfad200c0 [stack 0]
+  Grade {
+   multiply {{parent.MasterControl.sthk}}
+   black_clamp false
+   name Grade13
+   xpos 343
+   ypos -117
+  }
+set Nfac20eb0 [stack 0]
+push $Nfad200c0
+push $Nbea9fab0
+  Dot {
+   name Dot42
+   xpos 750
+   ypos -822
+  }
+set Nfab21c50 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r+(2*pi/nr))  *(nr/2))"
+   name Expression30
+   xpos 730
+   ypos -726
+  }
+push $Nfc518f10
+  Dot {
+   name Dot36
+   xpos 981
+   ypos -893
+  }
+set Nbc0ace60 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r+(2*pi/nr))  * (nr/2))"
+   name Expression12
+   xpos 1026
+   ypos -809
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch11
+   xpos 1026
+   ypos -658
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression32
+   xpos 1026
+   ypos -588
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy6
+   xpos 1026
+   ypos -110
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression34
+   xpos 1026
+   ypos -21
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge14
+   xpos 1026
+   ypos 37
+  }
+  Grade {
+   blackpoint {{Grade9.blackpoint}}
+   blackpoint_panelDropped {{Grade9.blackpoint_panelDropped}}
+   whitepoint {{Grade9.whitepoint}}
+   whitepoint_panelDropped {{Grade9.whitepoint_panelDropped}}
+   black {{Grade9.black}}
+   black_panelDropped {{Grade9.black_panelDropped}}
+   white {{Grade9.white}}
+   white_panelDropped {{Grade9.white_panelDropped}}
+   multiply {{Grade9.multiply}}
+   multiply_panelDropped {{Grade9.multiply_panelDropped}}
+   add {{Grade9.add}}
+   add_panelDropped {{Grade9.add_panelDropped}}
+   gamma {{Grade9.gamma}}
+   gamma_panelDropped {{Grade9.gamma_panelDropped}}
+   reverse {{Grade9.reverse}}
+   black_clamp {{Grade9.black_clamp}}
+   white_clamp {{Grade9.white_clamp}}
+   inject {{Grade9.inject}}
+   invert_mask {{Grade9.invert_mask}}
+   fringe {{Grade9.fringe}}
+   process_mask {{Grade9.process_mask}}
+   invert_unpremult {{Grade9.invert_unpremult}}
+   enable_mix_luminance {{Grade9.enable_mix_luminance}}
+   mix_luminance {{Grade9.mix_luminance}}
+   mix {{Grade9.mix}}
+   name Grade19
+   xpos 1026
+   ypos 116
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge2
+   xpos 1046
+   ypos 1309
+   disable true
+  }
+  Grade {
+   name Grade5
+   label "odd ray grade"
+   xpos 1046
+   ypos 1372
+  }
+push $Nfbc1a4c0
+push $Nfac20eb0
+push $Nfad200c0
+push $Nfab21c50
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r)  * (nr/2))"
+   name Expression1
+   xpos 564
+   ypos -716
+  }
+push $Nbc0ace60
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r)  * (nr/2))"
+   name Expression5
+   xpos 838
+   ypos -807
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch8
+   xpos 838
+   ypos -653
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression31
+   xpos 838
+   ypos -583
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy5
+   xpos 838
+   ypos -178
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression33
+   xpos 838
+   ypos -89
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge13
+   xpos 838
+   ypos -33
+  }
+  Grade {
+   add {{parent.MasterControl.thickness}}
+   white_clamp true
+   name Grade9
+   xpos 838
+   ypos 81
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge1
+   xpos 838
+   ypos 1354
+   disable true
+  }
+  Merge2 {
+   inputs 2
+   operation max
+   name Merge11
+   xpos 923
+   ypos 1444
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle1
+   label "\[value in]"
+   xpos 923
+   ypos 1510
+  }
+  Grade {
+   black_clamp false
+   name Grade15
+   xpos 923
+   ypos 1592
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge6
+   xpos 923
+   ypos 1683
+   disable {{1-parent.MasterControl.boolean}}
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge5
+   xpos 923
+   ypos 1917
+   disable {{1-parent.MasterControl.boolean_2}}
+  }
+  Shuffle {
+   alpha black
+   name Shuffle2
+   label "\[value in]"
+   xpos 923
+   ypos 2293
+  }
+  Grade {
+   gamma 0.9
+   black_clamp false
+   name Grade14
+   xpos 923
+   ypos 2637
+  }
+  Dot {
+   name Dot17
+   xpos 957
+   ypos 2874
+  }
+set Nfa117d80 [stack 0]
+  Transform {
+   scale {{parent.Reformat3.scale.0} {parent.Reformat3.scale.1}}
+   center {{width/2} {height/2}}
+   filter Mitchell
+   name Transform1
+   label scale
+   xpos 1096
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {1 1}
+   resize none
+   filter Lanczos4
+   name Reformat3
+   label "scale format"
+   xpos 1221
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {{parent.MasterControl.radius/200}}
+   filter Lanczos4
+   name Reformat2
+   label radius
+   xpos 1338
+   ypos 2864
+  }
+  Shuffle {
+   alpha white
+   name Shuffle4
+   label "\[value in]"
+   xpos 1448
+   ypos 2864
+  }
+set Nbb4a2ce0 [stack 0]
+push $Nbb4a2ce0
+  Shuffle {
+   alpha white
+   name Shuffle10
+   label "\[value in]"
+   xpos 1552
+   ypos 2864
+   disable {{parent.togglefix}}
+  }
+  Grade {
+   multiply 1e-05
+   black_clamp false
+   name Grade17
+   label normalize
+   xpos 1662
+   ypos 2864
+  }
+push $Nfc717100
+  Shuffle {
+   alpha white
+   name Shuffle3
+   label "\[value in]"
+   xpos 1792
+   ypos 2574
+  }
+  Convolve2 {
+   inputs 2
+   channels rgba
+   filter_channel rgba.red
+   use_input_channels true
+   normalize false
+   name Convolve1
+   xpos 1792
+   ypos 2870
+  }
+  Shuffle {
+   alpha black
+   name Shuffle9
+   label "\[value in]"
+   xpos 1792
+   ypos 2919
+  }
+  Crop {
+   box {0 0 {input.width} {input.height}}
+   name Crop1
+   xpos 1792
+   ypos 2993
+   disable {{1-parent.MasterControl.boolean_1}}
+  }
+push $Nfa117d80
+  Switch {
+   inputs 3
+   which {{parent.Switch3.which}}
+   name Switch2
+   xpos 1380
+   ypos 3232
+  }
+  Output {
+   name Output1
+   xpos 1380
+   ypos 3336
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote1
+   label "   create rays    "
+   note_font_size 40
+   xpos 1188
+   ypos -730
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote2
+   label "    spread    "
+   note_font_size 40
+   xpos 1168
+   ypos -103
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote3
+   label "   create glow    "
+   note_font_size 40
+   xpos 642
+   ypos 592
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote5
+   label "    falloff to zero    "
+   note_font_size 40
+   xpos 117
+   ypos 1047
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote6
+   label "    convolve    "
+   note_font_size 40
+   xpos 1557
+   ypos 2747
+  }
+ end_group
+ Grade {
+  multiply 1.5
+  white_clamp true
+  name Grade13
+  xpos 405
+  ypos 161
+ }
+ Dot {
+  name Dot21
+  xpos 439
+  ypos 409
+ }
+push $Nfce17330
+ Group {
+  name FlareSuperStar2
+  label "additional glow"
+  xpos 182
+  ypos 52
+  addUserKnob {20 User l "Shape Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {26 _3 l "Global Controls"}
+  addUserKnob {41 mode t "the mode in which the tool operates.\nPosition: the flare gets generated at the defined position\nConvolve: the flare gets applied via a convolve of the input image\nOutput Kernel: outputs the kernel that would get feeded into the convolve so you could make further adjustetments and apply as your custom filter to your node of choice" T MasterControl.mode}
+  addUserKnob {41 center t "defines the center where the flare gets created if in position-mode." -STARTLINE T MasterControl.center}
+  addUserKnob {6 togglefix l "toggle to fix \"missing channel\" error caused by the convolve" t "Sometimes, when in convolve-mode, the tool gives a \"missing channel\" error. This is a dirty workaround to fix it. It might occure again, then toggle the checkbox again." +STARTLINE}
+  addUserKnob {41 multiply_1 l intensity t "global intensity" T MasterControl.multiply_1}
+  addUserKnob {41 gamma_2_1 l gamma t "global gamma" T MasterControl.gamma_2}
+  addUserKnob {41 scale t "changes the x and y scale of the flare around the center point." T MasterControl.scale}
+  addUserKnob {41 relativeradius l radius t "Controls the kernel size if in konvolve mode and the radius at which the flare will be zero if falloff to zero is enabled.\nThis is a factor of the image width." T MasterControl.relativeradius}
+  addUserKnob {26 ""}
+  addUserKnob {26 "" l "Ray Controls"}
+  addUserKnob {41 nr l "number of rays" t "Sets the number of rays that will be generated by the flare." T MasterControl.nr}
+  addUserKnob {41 gamma_4 l "odd ray length" t xfgjxfhjc T Grade5.gamma}
+  addUserKnob {26 text_3 l "" +STARTLINE T "doesn't actually change the length of the rays,\nbut applies a gamma correction"}
+  addUserKnob {41 rotation t "Controls the Rotation of the rays." T MasterControl.rotation}
+  addUserKnob {41 multiply_2 l "ray intensity" t "Controls intensity of the rays." T MasterControl.multiply_2}
+  addUserKnob {41 gamma_3 l "ray gamma" t "Controls the gamma of the rays." T MasterControl.gamma_3}
+  addUserKnob {41 thickness t "Lets you adjust the thickness of the rays." T MasterControl.thickness}
+  addUserKnob {41 multiply l softness t "Lets you control the softness of the rays." T MasterControl.multiply}
+  addUserKnob {41 coneangle l "Cone angle" t "Controls the angle of the rays." T MasterControl.coneangle}
+  addUserKnob {26 "" l "Spread Controls"}
+  addUserKnob {41 sdistn l "spread distance" t "Distance at which the spread will start. This is a factor of the global radius." T MasterControl.sdistn}
+  addUserKnob {26 text_2 l "" +STARTLINE T "The spread distance is a factor of the radius."}
+  addUserKnob {41 ssize l "spread angle" t "Spreads the rays via changing their angle from the spreaddistance outwards." T MasterControl.ssize}
+  addUserKnob {41 sthk l "spread thickness" t "Changes the thickness of the rays from the spreaddistance outwards." T MasterControl.sthk}
+  addUserKnob {41 sfotype l "spread falloff type" t "Lets you choose between a linear or an exponential falloff of the spread." T MasterControl.sfotype}
+  addUserKnob {41 gamma l "" t "Gamma control for the spread falloff." -STARTLINE T MasterControl.gamma}
+  addUserKnob {26 ""}
+  addUserKnob {41 boolean l "Enable inner Glow" T MasterControl.boolean}
+  addUserKnob {41 boolean_2 l "Enable Glare" T MasterControl.boolean_2}
+  addUserKnob {41 boolean_1 l "Crop convolve" t "Crops the result to the image format in convolve mode to reduce boundingbox size." T MasterControl.boolean_1}
+  addUserKnob {26 ""}
+  addUserKnob {26 _1 l "" +STARTLINE T "FlareSuperStar v1.2\nby Lukas Fabian - December 2020"}
+  addUserKnob {20 tab l "Glare Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {41 Intensity l intensity t "Controls intensity of the glare." T NoiseControl.Intensity}
+  addUserKnob {41 gamma_1_1 l gamma t "Controls gamma of the glare." T NoiseControl.gamma_1}
+  addUserKnob {26 ""}
+  addUserKnob {41 detail t "Controls the ray detail of the glare." T NoiseControl.detail}
+  addUserKnob {41 z1 l z t "zOffset for the ray-detail." T NoiseControl.z1}
+  addUserKnob {41 detail_1 l detail2 t "Controls additional detail for the rays outwards." T NoiseControl2.detail}
+  addUserKnob {41 z1_1 l z2 t "zOffset for detail2." T NoiseControl2.z1}
+  addUserKnob {41 sfix l "Enable seam fix" t "If disabled there could be a visible 0-1 in the glare. Also changes the bottom part of the glare appearence. Just try which setting suits your situation." T NoiseControl.sfix}
+  addUserKnob {26 ""}
+  addUserKnob {41 speed l "shimmer speed" t "If set to anything bigger then zero the glare will shimmer over time. The bigger the value the faster the shimmer." T NoiseControl.speed}
+  addUserKnob {41 posspeed l "position change speed" t "Only works properly in position-mode.\nIf the center-position of the flare is changed, the glare will change its shape.\nThe higher the number the bigger the change. If it´s set to zero there won´t be any change in the glare due to position changes." T NoiseControl.posspeed}
+  addUserKnob {20 tab_1 l "Glow Controls"}
+  addUserKnob {26 _2 l "" +STARTLINE}
+  addUserKnob {41 multiply_3 l "glow intensity" t "Controls the intensity of the glow." T Grade16.multiply}
+  addUserKnob {41 gamma_2 l "glow gamma" t "Controls the gamma of the glow." T Grade16.gamma}
+  addUserKnob {20 fotz l "Falloff to Zero"}
+  addUserKnob {26 ""}
+  addUserKnob {26 text l "" +STARTLINE T "If \"falloff to zero\" is enabled, the flare will be zero at the point defined by \nthe global radius. If \"fall off to zero\" is disabled it results in an inverse square\nfalloff, this might introduce edges in convolve-mode.\n\nUsually you want to have it on in convolve-mode, and off in position mode.\n\n"}
+  addUserKnob {26 text_1 l "Falloff to Zero"}
+  addUserKnob {41 fo l "enable in position mode" T MasterControl.fo}
+  addUserKnob {41 focm l "enable in convolve mode" T MasterControl.focm}
+  addUserKnob {41 fotype l "falloff type" t "Lets you choose between a linear or an exponential falloff." T MasterControl.fotype}
+  addUserKnob {41 gamma_1 l "" t "Gammacontrol for the falloff." -STARTLINE T MasterControl.gamma_1}
+  addUserKnob {26 ""}
+ }
+  BackdropNode {
+   inputs 0
+   name BackdropNode1
+   tile_color 0x71c67100
+   label Controlers
+   note_font_size 42
+   xpos 2321
+   ypos -1190
+   bdwidth 855
+   bdheight 322
+  }
+  Grade {
+   inputs 0
+   multiply 0.105
+   black_clamp false
+   name AngleControl
+   xpos 2440
+   ypos -1028
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote4
+   label "   create glare    "
+   note_font_size 40
+   xpos -1067
+   ypos -10
+  }
+  Grade {
+   inputs 0
+   black_clamp false
+   name ARControl
+   xpos 2697
+   ypos -1029
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/150)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl
+   xpos 2824
+   ypos -1028
+   addUserKnob {20 User l Controls}
+   addUserKnob {7 z1 l z}
+   z1 4
+   addUserKnob {7 speed l "shimmer speed" R 0 5}
+   addUserKnob {7 detail}
+   detail 45
+   addUserKnob {41 Intensity l intensity T Grade3.multiply}
+   addUserKnob {41 gamma_1 l gamma T Grade4.gamma}
+   addUserKnob {7 posspeed l "position speed" R 0 5}
+   posspeed 2
+   addUserKnob {6 sfix l "Enable seam fix" +STARTLINE}
+   sfix true
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/100)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl2
+   xpos 2959
+   ypos -1034
+   addUserKnob {20 User l "z Controls"}
+   addUserKnob {7 z1 l z}
+   z1 9
+   addUserKnob {7 speed}
+   speed {{parent.NoiseControl.speed}}
+   addUserKnob {7 detail l detail2}
+   detail 90
+  }
+  Input {
+   inputs 0
+   name img
+   xpos 1386
+   ypos -1284
+  }
+  Dot {
+   name Dot19
+   xpos 1420
+   ypos -1215
+  }
+  Dot {
+   name Dot11
+   xpos 1420
+   ypos -1090
+  }
+set Nb52cc6a0 [stack 0]
+  Dot {
+   name Dot18
+   xpos 1826
+   ypos -1090
+  }
+set Nf9b18710 [stack 0]
+  NoOp {
+   name MasterControl
+   xpos 2579
+   ypos -1035
+   addUserKnob {20 User l Controls}
+   addUserKnob {26 _1 l "" +STARTLINE}
+   addUserKnob {26 _4 l "General Controls"}
+   addUserKnob {4 mode M {Position Convolve "Output Kernel" ""}}
+   addUserKnob {12 center -STARTLINE}
+   center {{parent.parent.NoOp1.position_2d} {parent.parent.NoOp1.position_2d}}
+   addUserKnob {41 multiply_1 l intensity T Grade14.multiply}
+   addUserKnob {41 gamma_2 l gamma T Grade14.gamma}
+   addUserKnob {3 nr l "number of rays"}
+   nr 18
+   addUserKnob {41 scale T Reformat3.scale}
+   addUserKnob {7 rotation R 0 360}
+   addUserKnob {7 radius l "absolute radius" R 1 1000}
+   radius {{(width/8)*(relativeradius+0.0000001)}}
+   addUserKnob {7 relativeradius l radius R 0 10}
+   relativeradius 1
+   addUserKnob {4 fotype l "falloff type" M {linear exponential}}
+   fotype exponential
+   addUserKnob {41 gamma_1 l "" -STARTLINE T Grade12.gamma}
+   addUserKnob {6 fo l "disable falloff" +STARTLINE}
+   addUserKnob {6 focm l "enable in convolve mode" +STARTLINE}
+   focm true
+   addUserKnob {26 _2 l "" +STARTLINE}
+   addUserKnob {26 _5 l "Ray Controls"}
+   addUserKnob {41 multiply_2 l "ray intensity" T Grade15.multiply}
+   addUserKnob {41 gamma_3 l "ray gamma" T Grade15.gamma}
+   addUserKnob {7 thickness R -2 2}
+   addUserKnob {41 multiply l softness T Grade9.multiply}
+   addUserKnob {41 coneangle l "cone angle" T AngleControl.multiply}
+   addUserKnob {26 _3 l "" +STARTLINE}
+   addUserKnob {26 _6 l "Spread Controls"}
+   addUserKnob {7 sdist l "spread distance safe" R 0.0001 1}
+   sdist {{sdistn+0.000001}}
+   addUserKnob {7 sdistn l "spread distance"}
+   sdistn 0.185
+   addUserKnob {7 ssize l "spread angle" R -2 2}
+   addUserKnob {7 sthk l "spread thickness" R -2 2}
+   addUserKnob {4 sfotype l "spread falloff type" M {linear exponential}}
+   addUserKnob {41 gamma l "" -STARTLINE T Grade10.gamma}
+   addUserKnob {26 ""}
+   addUserKnob {6 boolean l "Enable inner Flare" +STARTLINE}
+   boolean true
+   addUserKnob {6 boolean_2 l "enable glare" +STARTLINE}
+   boolean_2 true
+   addUserKnob {6 boolean_1 l "Crop convolve" +STARTLINE}
+   boolean_1 true
+  }
+  Reformat {
+   inputs 0
+   format "1024 1024 0 0 1024 1024 1 square_1K"
+   box_width 2000
+   filter Lanczos4
+   name Reformat1
+   xpos 716
+   ypos -1000
+  }
+  Dot {
+   name Dot7
+   xpos 750
+   ypos -937
+  }
+set Nf9919220 [stack 0]
+  Dot {
+   name Dot8
+   xpos -150
+   ypos -937
+  }
+  Dot {
+   name Dot10
+   xpos -150
+   ypos -421
+  }
+set Nf9922d50 [stack 0]
+  Dot {
+   name Dot20
+   xpos -150
+   ypos 96
+  }
+set Nf9817d40 [stack 0]
+  Dot {
+   name Dot16
+   xpos -150
+   ypos 402
+  }
+set Nf981cb20 [stack 0]
+  Dot {
+   name Dot9
+   xpos -150
+   ypos 550
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 radius
+   temp_expr2 (width/2)-10
+   expr0 "(radius - sqrt(  pow2(x-centerx)+pow2(y-centery)  )  ) / radius"
+   name Expression13
+   xpos 26
+   ypos 546
+  }
+push $Nb52cc6a0
+  Dot {
+   name Dot12
+   xpos -17
+   ypos -1090
+  }
+  Shuffle {
+   red black
+   green black
+   blue black
+   alpha black
+   name Shuffle5
+   label "\[value in]"
+   xpos -51
+   ypos -1005
+  }
+  Dot {
+   name Dot13
+   xpos -17
+   ypos -893
+  }
+set Nf951a6b0 [stack 0]
+  Dot {
+   name Dot14
+   xpos -17
+   ypos -510
+  }
+set Nf951f440 [stack 0]
+  Dot {
+   name Dot6
+   xpos -17
+   ypos 174
+  }
+set Nf9524290 [stack 0]
+  Dot {
+   name Dot1
+   xpos -17
+   ypos 381
+  }
+set Nf9419200 [stack 0]
+  Dot {
+   name Dot15
+   xpos -17
+   ypos 483
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   temp_name3 sw
+   temp_expr3 parent.MasterControl.scale.0
+   expr0 "(radius - sqrt(  pow2((x-centerx)*(1/sw))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  )  ) / radius"
+   name Expression8
+   xpos 197
+   ypos 478
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.mode}}
+   name Switch3
+   xpos 197
+   ypos 564
+  }
+  Grade {
+   name Grade20
+   xpos 197
+   ypos 604
+  }
+set Nf9219880 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression9
+   xpos 117
+   ypos 650
+  }
+  Dot {
+   name Dot4
+   label expo
+   xpos 151
+   ypos 691
+  }
+push $Nf9219880
+  Dot {
+   name Dot37
+   xpos 338
+   ypos 650
+  }
+  Dot {
+   name Dot5
+   label linear
+   xpos 338
+   ypos 686
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.fotype}}
+   name Switch1
+   xpos 201
+   ypos 720
+  }
+  Grade {
+   black_clamp false
+   name Grade12
+   xpos 201
+   ypos 775
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle8
+   label "\[value in]"
+   xpos 201
+   ypos 812
+  }
+  Dot {
+   name Dot32
+   xpos 235
+   ypos 962
+  }
+set Nf8a20e50 [stack 0]
+  Dot {
+   name Dot41
+   xpos 235
+   ypos 1011
+  }
+push $Nf981cb20
+  Dot {
+   name Dot39
+   xpos 480
+   ypos 402
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 512
+   temp_name1 centery
+   temp_expr1 512
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   expr0 "sqrt(  pow2((x/width*1024)-centerx)+pow2((y/height*1024)-centery) )"
+   name Expression28
+   xpos 446
+   ypos 526
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression29
+   xpos 446
+   ypos 568
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge10
+   xpos 446
+   ypos 1007
+   disable {{1-parent.MasterControl.focm}}
+  }
+  Dot {
+   name Dot40
+   xpos 480
+   ypos 1070
+  }
+push $Nf8a20e50
+push $Nf9419200
+  Dot {
+   name Dot38
+   xpos 608
+   ypos 381
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x/width*1920
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y/height*1080
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt(  pow2(((x/width*1920)-centerx)*(1/sw))+pow2(((y/height*1080)-centery)*(1/sh)) )"
+   name Expression2
+   xpos 574
+   ypos 501
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression3
+   xpos 574
+   ypos 544
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge3
+   xpos 574
+   ypos 958
+   disable {{1-parent.MasterControl.fo}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch10
+   xpos 574
+   ypos 1066
+  }
+  Grade {
+   multiply 1000
+   black_clamp false
+   name Grade1
+   xpos 574
+   ypos 1189
+  }
+  Clamp {
+   maximum 2000
+   name Clamp1
+   xpos 574
+   ypos 1237
+  }
+  Dot {
+   name Dot21
+   xpos 608
+   ypos 1358
+  }
+set Nf831bdd0 [stack 0]
+  Grade {
+   black_clamp false
+   name Grade4
+   xpos -675
+   ypos 1354
+  }
+push $Nf9817d40
+  Dot {
+   name Dot24
+   xpos -656
+   ypos 96
+  }
+  Dot {
+   name Dot22
+   xpos -1105
+   ypos 96
+  }
+set Nf8226250 [stack 0]
+  Dot {
+   name Dot29
+   xpos -1739
+   ypos 186
+  }
+set Nf811b7b0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression24
+   xpos -1691
+   ypos 262
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression25
+   xpos -1691
+   ypos 326
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade11
+   xpos -1691
+   ypos 412
+  }
+push $Nf811b7b0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )) / (pi*2)"
+   name Expression26
+   xpos -1859
+   ypos 254
+  }
+  Dot {
+   name Dot33
+   xpos -1825
+   ypos 510
+  }
+push $Nf8226250
+  Dot {
+   name Dot25
+   xpos -1105
+   ypos 283
+  }
+set Nf7d20b80 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   expr0 "atan(x - centerx , y - centery)/pi"
+   name Expression15
+   xpos -1139
+   ypos 451
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy3
+   xpos -1139
+   ypos 500
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Dot {
+   name Dot27
+   xpos -1105
+   ypos 552
+  }
+push $Nf9524290
+  Dot {
+   name Dot23
+   xpos -935
+   ypos 174
+  }
+set Nf7a17320 [stack 0]
+  Dot {
+   name Dot28
+   xpos -1351
+   ypos 186
+  }
+set Nf7a1c4f0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression21
+   xpos -1303
+   ypos 258
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression22
+   xpos -1303
+   ypos 308
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade6
+   xpos -1303
+   ypos 355
+  }
+push $Nf7a1c4f0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )  ) / (pi*2)"
+   name Expression23
+   xpos -1474
+   ypos 252
+  }
+  Dot {
+   name Dot34
+   xpos -1440
+   ypos 428
+  }
+push $Nf7a17320
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression4
+   xpos -969
+   ypos 377
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy2
+   xpos -969
+   ypos 418
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch5
+   xpos -969
+   ypos 548
+  }
+set Nf741e3e0 [stack 0]
+push $Nf7d20b80
+  Expression {
+   temp_name0 cx
+   temp_expr0 width/2
+   temp_name1 cy
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression16
+   xpos -756
+   ypos 408
+  }
+push $Nf7a17320
+  Dot {
+   name Dot26
+   xpos -612
+   ypos 266
+  }
+  Expression {
+   temp_name0 cx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 cy
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression19
+   xpos -646
+   ypos 408
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch9
+   xpos -646
+   ypos 475
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy1
+   xpos -646
+   ypos 542
+  }
+set Nf71204b0 [stack 0]
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset+3, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression20
+   xpos -393
+   ypos 604
+  }
+push $Nf71204b0
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r-g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression18
+   xpos -530
+   ypos 607
+  }
+push $Nf71204b0
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r+g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression17
+   xpos -646
+   ypos 610
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge8
+   xpos -605
+   ypos 660
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge9
+   xpos -605
+   ypos 709
+  }
+  Dot {
+   name Dot35
+   xpos -571
+   ypos 781
+  }
+push $Nf741e3e0
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/width))*2*parent.NoiseControl.posspeed
+   expr0 "fBm(r*parent.NoiseControl.detail , y, parent.NoiseControl.zoffset, oct, lac, gain)"
+   name Expression14
+   xpos -969
+   ypos 623
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge7
+   xpos -969
+   ypos 777
+  }
+  Grade {
+   name Grade2
+   xpos -969
+   ypos 869
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge4
+   xpos -969
+   ypos 1354
+  }
+  Clamp {
+   maximum 2000
+   name Clamp2
+   xpos -969
+   ypos 1511
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle7
+   label "\[value in]"
+   xpos -969
+   ypos 1576
+  }
+  Grade {
+   multiply 2
+   black_clamp false
+   name Grade3
+   xpos -969
+   ypos 1635
+  }
+  Dot {
+   name Dot30
+   xpos -935
+   ypos 1921
+  }
+push $Nf831bdd0
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle6
+   label "\[value in]"
+   xpos 574
+   ypos 1515
+  }
+  Grade {
+   multiply 0.5
+   black_clamp false
+   name Grade16
+   xpos 574
+   ypos 1588
+  }
+  Dot {
+   name Dot31
+   xpos 608
+   ypos 1687
+  }
+push $Nf831bdd0
+push $Nf9922d50
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 spdist
+   temp_expr2 (width/2-10)*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2(x-centerx)+pow2(y-centery)  ) -spdist ) / spdist"
+   name Expression11
+   xpos 156
+   ypos -377
+  }
+push $Nf951f440
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 spdist
+   temp_expr2 parent.MasterControl.radius*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2((x-centerx)*(1/parent.MasterControl.scale.0))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  ) -spdist ) / spdist"
+   name Expression6
+   xpos 334
+   ypos -403
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch4
+   xpos 334
+   ypos -368
+  }
+  Grade {
+   name Grade8
+   xpos 334
+   ypos -323
+  }
+set Nb4ac97d0 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression7
+   xpos 254
+   ypos -279
+  }
+  Dot {
+   name Dot3
+   label expo
+   xpos 288
+   ypos -241
+  }
+push $Nb4ac97d0
+  Dot {
+   name Dot2
+   label linear
+   xpos 440
+   ypos -271
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.sfotype}}
+   name Switch7
+   xpos 343
+   ypos -206
+  }
+  Grade {
+   black_clamp false
+   name Grade10
+   xpos 343
+   ypos -172
+  }
+set Nb47ca860 [stack 0]
+  Grade {
+   multiply {{parent.MasterControl.sthk}}
+   black_clamp false
+   name Grade13
+   xpos 343
+   ypos -117
+  }
+set Nb46cb650 [stack 0]
+push $Nb47ca860
+push $Nf9919220
+  Dot {
+   name Dot42
+   xpos 750
+   ypos -822
+  }
+set Nb45cc280 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r+(2*pi/nr))  *(nr/2))"
+   name Expression30
+   xpos 730
+   ypos -726
+  }
+push $Nf951a6b0
+  Dot {
+   name Dot36
+   xpos 981
+   ypos -893
+  }
+set Nb44cf600 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r+(2*pi/nr))  * (nr/2))"
+   name Expression12
+   xpos 1026
+   ypos -809
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch11
+   xpos 1026
+   ypos -658
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression32
+   xpos 1026
+   ypos -588
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy6
+   xpos 1026
+   ypos -110
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression34
+   xpos 1026
+   ypos -21
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge14
+   xpos 1026
+   ypos 37
+  }
+  Grade {
+   blackpoint {{Grade9.blackpoint}}
+   blackpoint_panelDropped {{Grade9.blackpoint_panelDropped}}
+   whitepoint {{Grade9.whitepoint}}
+   whitepoint_panelDropped {{Grade9.whitepoint_panelDropped}}
+   black {{Grade9.black}}
+   black_panelDropped {{Grade9.black_panelDropped}}
+   white {{Grade9.white}}
+   white_panelDropped {{Grade9.white_panelDropped}}
+   multiply {{Grade9.multiply}}
+   multiply_panelDropped {{Grade9.multiply_panelDropped}}
+   add {{Grade9.add}}
+   add_panelDropped {{Grade9.add_panelDropped}}
+   gamma {{Grade9.gamma}}
+   gamma_panelDropped {{Grade9.gamma_panelDropped}}
+   reverse {{Grade9.reverse}}
+   black_clamp {{Grade9.black_clamp}}
+   white_clamp {{Grade9.white_clamp}}
+   inject {{Grade9.inject}}
+   invert_mask {{Grade9.invert_mask}}
+   fringe {{Grade9.fringe}}
+   process_mask {{Grade9.process_mask}}
+   invert_unpremult {{Grade9.invert_unpremult}}
+   enable_mix_luminance {{Grade9.enable_mix_luminance}}
+   mix_luminance {{Grade9.mix_luminance}}
+   mix {{Grade9.mix}}
+   name Grade19
+   xpos 1026
+   ypos 116
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge2
+   xpos 1046
+   ypos 1309
+  }
+  Grade {
+   gamma 0.63
+   name Grade5
+   label "odd ray grade"
+   xpos 1046
+   ypos 1372
+  }
+push $Nf831bdd0
+push $Nb46cb650
+push $Nb47ca860
+push $Nb45cc280
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r)  * (nr/2))"
+   name Expression1
+   xpos 564
+   ypos -716
+  }
+push $Nb44cf600
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r)  * (nr/2))"
+   name Expression5
+   xpos 838
+   ypos -807
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch8
+   xpos 838
+   ypos -653
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression31
+   xpos 838
+   ypos -583
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy5
+   xpos 838
+   ypos -178
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression33
+   xpos 838
+   ypos -89
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge13
+   xpos 838
+   ypos -33
+  }
+  Grade {
+   multiply 0.51
+   add {{parent.MasterControl.thickness}}
+   white_clamp true
+   name Grade9
+   xpos 838
+   ypos 81
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge1
+   xpos 838
+   ypos 1354
+  }
+  Merge2 {
+   inputs 2
+   operation max
+   name Merge11
+   xpos 923
+   ypos 1444
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle1
+   label "\[value in]"
+   xpos 923
+   ypos 1510
+  }
+  Grade {
+   multiply 0
+   black_clamp false
+   name Grade15
+   xpos 923
+   ypos 1592
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge6
+   xpos 923
+   ypos 1683
+   disable {{1-parent.MasterControl.boolean}}
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge5
+   xpos 923
+   ypos 1917
+   disable {{1-parent.MasterControl.boolean_2}}
+  }
+  Shuffle {
+   alpha black
+   name Shuffle2
+   label "\[value in]"
+   xpos 923
+   ypos 2293
+  }
+  Grade {
+   gamma 0.9
+   black_clamp false
+   name Grade14
+   xpos 923
+   ypos 2637
+  }
+  Dot {
+   name Dot17
+   xpos 957
+   ypos 2874
+  }
+set Nb33c2560 [stack 0]
+  Transform {
+   scale {{parent.Reformat3.scale.0} {parent.Reformat3.scale.1}}
+   center {{width/2} {height/2}}
+   filter Mitchell
+   name Transform1
+   label scale
+   xpos 1096
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {1.2 1}
+   resize none
+   filter Lanczos4
+   name Reformat3
+   label "scale format"
+   xpos 1221
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {{parent.MasterControl.radius/200}}
+   filter Lanczos4
+   name Reformat2
+   label radius
+   xpos 1338
+   ypos 2864
+  }
+  Shuffle {
+   alpha white
+   name Shuffle4
+   label "\[value in]"
+   xpos 1448
+   ypos 2864
+  }
+set Nb30c54d0 [stack 0]
+push $Nb30c54d0
+  Shuffle {
+   alpha white
+   name Shuffle10
+   label "\[value in]"
+   xpos 1552
+   ypos 2864
+   disable {{parent.togglefix}}
+  }
+  Grade {
+   multiply 1e-05
+   black_clamp false
+   name Grade17
+   label normalize
+   xpos 1662
+   ypos 2864
+  }
+push $Nf9b18710
+  Shuffle {
+   alpha white
+   name Shuffle3
+   label "\[value in]"
+   xpos 1792
+   ypos 2574
+  }
+  Convolve2 {
+   inputs 2
+   channels rgba
+   filter_channel rgba.red
+   use_input_channels true
+   normalize false
+   name Convolve1
+   xpos 1792
+   ypos 2870
+  }
+  Shuffle {
+   alpha black
+   name Shuffle9
+   label "\[value in]"
+   xpos 1792
+   ypos 2919
+  }
+  Crop {
+   box {0 0 {input.width} {input.height}}
+   name Crop1
+   xpos 1792
+   ypos 2993
+   disable {{1-parent.MasterControl.boolean_1}}
+  }
+push $Nb33c2560
+  Switch {
+   inputs 3
+   which {{parent.Switch3.which}}
+   name Switch2
+   xpos 1380
+   ypos 3232
+  }
+  Output {
+   name Output1
+   xpos 1380
+   ypos 3336
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote1
+   label "   create rays    "
+   note_font_size 40
+   xpos 1188
+   ypos -730
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote2
+   label "    spread    "
+   note_font_size 40
+   xpos 1168
+   ypos -103
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote3
+   label "   create glow    "
+   note_font_size 40
+   xpos 642
+   ypos 592
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote5
+   label "    falloff to zero    "
+   note_font_size 40
+   xpos 117
+   ypos 1047
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote6
+   label "    convolve    "
+   note_font_size 40
+   xpos 1557
+   ypos 2747
+  }
+ end_group
+ TransformMasked {
+  channels {-rgba.red rgba.green -rgba.blue none}
+  rotate 1
+  center {{parent.NoOp1.position_2d} {parent.NoOp1.position_2d}}
+  shutteroffset centred
+  name Transform5
+  xpos 182
+  ypos 161
+ }
+ Grade {
+  white {0.7400000095 1 1.25999999 1}
+  multiply 2
+  name Grade12
+  xpos 182
+  ypos 218
+ }
+ Multiply {
+  value {{parent.Dynamic_Trigger2.botriggerexp}}
+  name Multiply6
+  label "\[value value]"
+  xpos 182
+  ypos 260
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge15
+  xpos 182
+  ypos 405
+ }
+ Dot {
+  name Dot20
+  xpos 216
+  ypos 789
+ }
+push $N411cc30
+ Group {
+  name FlareSuperStar1
+  label "additional glow"
+  xpos -1049
+  ypos 50
+  addUserKnob {20 User l "Shape Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {26 _3 l "Global Controls"}
+  addUserKnob {41 mode t "the mode in which the tool operates.\nPosition: the flare gets generated at the defined position\nConvolve: the flare gets applied via a convolve of the input image\nOutput Kernel: outputs the kernel that would get feeded into the convolve so you could make further adjustetments and apply as your custom filter to your node of choice" T MasterControl.mode}
+  addUserKnob {41 center t "defines the center where the flare gets created if in position-mode." -STARTLINE T MasterControl.center}
+  addUserKnob {6 togglefix l "toggle to fix \"missing channel\" error caused by the convolve" t "Sometimes, when in convolve-mode, the tool gives a \"missing channel\" error. This is a dirty workaround to fix it. It might occure again, then toggle the checkbox again." +STARTLINE}
+  addUserKnob {41 multiply_1 l intensity t "global intensity" T MasterControl.multiply_1}
+  addUserKnob {41 gamma_2_1 l gamma t "global gamma" T MasterControl.gamma_2}
+  addUserKnob {41 scale t "changes the x and y scale of the flare around the center point." T MasterControl.scale}
+  addUserKnob {41 relativeradius l radius t "Controls the kernel size if in konvolve mode and the radius at which the flare will be zero if falloff to zero is enabled.\nThis is a factor of the image width." T MasterControl.relativeradius}
+  addUserKnob {26 ""}
+  addUserKnob {26 "" l "Ray Controls"}
+  addUserKnob {41 nr l "number of rays" t "Sets the number of rays that will be generated by the flare." T MasterControl.nr}
+  addUserKnob {41 gamma_4 l "odd ray length" t xfgjxfhjc T Grade5.gamma}
+  addUserKnob {26 text_3 l "" +STARTLINE T "doesn't actually change the length of the rays,\nbut applies a gamma correction"}
+  addUserKnob {41 rotation t "Controls the Rotation of the rays." T MasterControl.rotation}
+  addUserKnob {41 multiply_2 l "ray intensity" t "Controls intensity of the rays." T MasterControl.multiply_2}
+  addUserKnob {41 gamma_3 l "ray gamma" t "Controls the gamma of the rays." T MasterControl.gamma_3}
+  addUserKnob {41 thickness t "Lets you adjust the thickness of the rays." T MasterControl.thickness}
+  addUserKnob {41 multiply l softness t "Lets you control the softness of the rays." T MasterControl.multiply}
+  addUserKnob {41 coneangle l "Cone angle" t "Controls the angle of the rays." T MasterControl.coneangle}
+  addUserKnob {26 "" l "Spread Controls"}
+  addUserKnob {41 sdistn l "spread distance" t "Distance at which the spread will start. This is a factor of the global radius." T MasterControl.sdistn}
+  addUserKnob {26 text_2 l "" +STARTLINE T "The spread distance is a factor of the radius."}
+  addUserKnob {41 ssize l "spread angle" t "Spreads the rays via changing their angle from the spreaddistance outwards." T MasterControl.ssize}
+  addUserKnob {41 sthk l "spread thickness" t "Changes the thickness of the rays from the spreaddistance outwards." T MasterControl.sthk}
+  addUserKnob {41 sfotype l "spread falloff type" t "Lets you choose between a linear or an exponential falloff of the spread." T MasterControl.sfotype}
+  addUserKnob {41 gamma l "" t "Gamma control for the spread falloff." -STARTLINE T MasterControl.gamma}
+  addUserKnob {26 ""}
+  addUserKnob {41 boolean l "Enable inner Glow" T MasterControl.boolean}
+  addUserKnob {41 boolean_2 l "Enable Glare" T MasterControl.boolean_2}
+  addUserKnob {41 boolean_1 l "Crop convolve" t "Crops the result to the image format in convolve mode to reduce boundingbox size." T MasterControl.boolean_1}
+  addUserKnob {26 ""}
+  addUserKnob {26 _1 l "" +STARTLINE T "FlareSuperStar v1.2\nby Lukas Fabian - December 2020"}
+  addUserKnob {20 tab l "Glare Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {41 Intensity l intensity t "Controls intensity of the glare." T NoiseControl.Intensity}
+  addUserKnob {41 gamma_1_1 l gamma t "Controls gamma of the glare." T NoiseControl.gamma_1}
+  addUserKnob {26 ""}
+  addUserKnob {41 detail t "Controls the ray detail of the glare." T NoiseControl.detail}
+  addUserKnob {41 z1 l z t "zOffset for the ray-detail." T NoiseControl.z1}
+  addUserKnob {41 detail_1 l detail2 t "Controls additional detail for the rays outwards." T NoiseControl2.detail}
+  addUserKnob {41 z1_1 l z2 t "zOffset for detail2." T NoiseControl2.z1}
+  addUserKnob {41 sfix l "Enable seam fix" t "If disabled there could be a visible 0-1 in the glare. Also changes the bottom part of the glare appearence. Just try which setting suits your situation." T NoiseControl.sfix}
+  addUserKnob {26 ""}
+  addUserKnob {41 speed l "shimmer speed" t "If set to anything bigger then zero the glare will shimmer over time. The bigger the value the faster the shimmer." T NoiseControl.speed}
+  addUserKnob {41 posspeed l "position change speed" t "Only works properly in position-mode.\nIf the center-position of the flare is changed, the glare will change its shape.\nThe higher the number the bigger the change. If it´s set to zero there won´t be any change in the glare due to position changes." T NoiseControl.posspeed}
+  addUserKnob {20 tab_1 l "Glow Controls"}
+  addUserKnob {26 _2 l "" +STARTLINE}
+  addUserKnob {41 multiply_3 l "glow intensity" t "Controls the intensity of the glow." T Grade16.multiply}
+  addUserKnob {41 gamma_2 l "glow gamma" t "Controls the gamma of the glow." T Grade16.gamma}
+  addUserKnob {20 fotz l "Falloff to Zero"}
+  addUserKnob {26 ""}
+  addUserKnob {26 text l "" +STARTLINE T "If \"falloff to zero\" is enabled, the flare will be zero at the point defined by \nthe global radius. If \"fall off to zero\" is disabled it results in an inverse square\nfalloff, this might introduce edges in convolve-mode.\n\nUsually you want to have it on in convolve-mode, and off in position mode.\n\n"}
+  addUserKnob {26 text_1 l "Falloff to Zero"}
+  addUserKnob {41 fo l "enable in position mode" T MasterControl.fo}
+  addUserKnob {41 focm l "enable in convolve mode" T MasterControl.focm}
+  addUserKnob {41 fotype l "falloff type" t "Lets you choose between a linear or an exponential falloff." T MasterControl.fotype}
+  addUserKnob {41 gamma_1 l "" t "Gammacontrol for the falloff." -STARTLINE T MasterControl.gamma_1}
+  addUserKnob {26 ""}
+ }
+  BackdropNode {
+   inputs 0
+   name BackdropNode1
+   tile_color 0x71c67100
+   label Controlers
+   note_font_size 42
+   xpos 2321
+   ypos -1190
+   bdwidth 855
+   bdheight 322
+  }
+  Grade {
+   inputs 0
+   multiply 0.105
+   black_clamp false
+   name AngleControl
+   xpos 2440
+   ypos -1028
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote4
+   label "   create glare    "
+   note_font_size 40
+   xpos -1067
+   ypos -10
+  }
+  Grade {
+   inputs 0
+   black_clamp false
+   name ARControl
+   xpos 2697
+   ypos -1029
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/150)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl
+   xpos 2824
+   ypos -1028
+   addUserKnob {20 User l Controls}
+   addUserKnob {7 z1 l z}
+   z1 1
+   addUserKnob {7 speed l "shimmer speed" R 0 5}
+   addUserKnob {7 detail}
+   detail 15
+   addUserKnob {41 Intensity l intensity T Grade3.multiply}
+   addUserKnob {41 gamma_1 l gamma T Grade4.gamma}
+   addUserKnob {7 posspeed l "position speed" R 0 5}
+   posspeed 2
+   addUserKnob {6 sfix l "Enable seam fix" +STARTLINE}
+   sfix true
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/100)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl2
+   xpos 2959
+   ypos -1034
+   addUserKnob {20 User l "z Controls"}
+   addUserKnob {7 z1 l z}
+   z1 1
+   addUserKnob {7 speed}
+   speed {{parent.NoiseControl.speed}}
+   addUserKnob {7 detail l detail2}
+   detail 10
+  }
+  Input {
+   inputs 0
+   name img
+   xpos 1386
+   ypos -1284
+  }
+  Dot {
+   name Dot19
+   xpos 1420
+   ypos -1215
+  }
+  Dot {
+   name Dot11
+   xpos 1420
+   ypos -1090
+  }
+set Nb22c6b00 [stack 0]
+  Dot {
+   name Dot18
+   xpos 1826
+   ypos -1090
+  }
+set Nb22cba50 [stack 0]
+  NoOp {
+   name MasterControl
+   xpos 2579
+   ypos -1035
+   addUserKnob {20 User l Controls}
+   addUserKnob {26 _1 l "" +STARTLINE}
+   addUserKnob {26 _4 l "General Controls"}
+   addUserKnob {4 mode M {Position Convolve "Output Kernel" ""}}
+   addUserKnob {12 center -STARTLINE}
+   center {{parent.parent.NoOp1.position_2d} {parent.parent.NoOp1.position_2d}}
+   addUserKnob {41 multiply_1 l intensity T Grade14.multiply}
+   addUserKnob {41 gamma_2 l gamma T Grade14.gamma}
+   addUserKnob {3 nr l "number of rays"}
+   nr 18
+   addUserKnob {41 scale T Reformat3.scale}
+   addUserKnob {7 rotation R 0 360}
+   addUserKnob {7 radius l "absolute radius" R 1 1000}
+   radius {{(width/8)*(relativeradius+0.0000001)}}
+   addUserKnob {7 relativeradius l radius R 0 10}
+   relativeradius 1
+   addUserKnob {4 fotype l "falloff type" M {linear exponential}}
+   fotype exponential
+   addUserKnob {41 gamma_1 l "" -STARTLINE T Grade12.gamma}
+   addUserKnob {6 fo l "disable falloff" +STARTLINE}
+   addUserKnob {6 focm l "enable in convolve mode" +STARTLINE}
+   focm true
+   addUserKnob {26 _2 l "" +STARTLINE}
+   addUserKnob {26 _5 l "Ray Controls"}
+   addUserKnob {41 multiply_2 l "ray intensity" T Grade15.multiply}
+   addUserKnob {41 gamma_3 l "ray gamma" T Grade15.gamma}
+   addUserKnob {7 thickness R -2 2}
+   addUserKnob {41 multiply l softness T Grade9.multiply}
+   addUserKnob {41 coneangle l "cone angle" T AngleControl.multiply}
+   addUserKnob {26 _3 l "" +STARTLINE}
+   addUserKnob {26 _6 l "Spread Controls"}
+   addUserKnob {7 sdist l "spread distance safe" R 0.0001 1}
+   sdist {{sdistn+0.000001}}
+   addUserKnob {7 sdistn l "spread distance"}
+   sdistn 0.185
+   addUserKnob {7 ssize l "spread angle" R -2 2}
+   addUserKnob {7 sthk l "spread thickness" R -2 2}
+   addUserKnob {4 sfotype l "spread falloff type" M {linear exponential}}
+   addUserKnob {41 gamma l "" -STARTLINE T Grade10.gamma}
+   addUserKnob {26 ""}
+   addUserKnob {6 boolean l "Enable inner Flare" +STARTLINE}
+   boolean true
+   addUserKnob {6 boolean_2 l "enable glare" +STARTLINE}
+   boolean_2 true
+   addUserKnob {6 boolean_1 l "Crop convolve" +STARTLINE}
+   boolean_1 true
+  }
+  Reformat {
+   inputs 0
+   format "1024 1024 0 0 1024 1024 1 square_1K"
+   box_width 2000
+   filter Lanczos4
+   name Reformat1
+   xpos 716
+   ypos -1000
+  }
+  Dot {
+   name Dot7
+   xpos 750
+   ypos -937
+  }
+set Nb20cc570 [stack 0]
+  Dot {
+   name Dot8
+   xpos -150
+   ypos -937
+  }
+  Dot {
+   name Dot10
+   xpos -150
+   ypos -421
+  }
+set Nb1fc61d0 [stack 0]
+  Dot {
+   name Dot20
+   xpos -150
+   ypos 96
+  }
+set Nb1fcb020 [stack 0]
+  Dot {
+   name Dot16
+   xpos -150
+   ypos 402
+  }
+set Nb1ec0100 [stack 0]
+  Dot {
+   name Dot9
+   xpos -150
+   ypos 550
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 radius
+   temp_expr2 (width/2)-10
+   expr0 "(radius - sqrt(  pow2(x-centerx)+pow2(y-centery)  )  ) / radius"
+   name Expression13
+   xpos 26
+   ypos 546
+  }
+push $Nb22c6b00
+  Dot {
+   name Dot12
+   xpos -17
+   ypos -1090
+  }
+  Shuffle {
+   red black
+   green black
+   blue black
+   alpha black
+   name Shuffle5
+   label "\[value in]"
+   xpos -51
+   ypos -1005
+  }
+  Dot {
+   name Dot13
+   xpos -17
+   ypos -893
+  }
+set Nb1ccd920 [stack 0]
+  Dot {
+   name Dot14
+   xpos -17
+   ypos -510
+  }
+set Nb1bc28b0 [stack 0]
+  Dot {
+   name Dot6
+   xpos -17
+   ypos 174
+  }
+set Nb1bc7700 [stack 0]
+  Dot {
+   name Dot1
+   xpos -17
+   ypos 381
+  }
+set Nb1bcc550 [stack 0]
+  Dot {
+   name Dot15
+   xpos -17
+   ypos 483
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   temp_name3 sw
+   temp_expr3 parent.MasterControl.scale.0
+   expr0 "(radius - sqrt(  pow2((x-centerx)*(1/sw))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  )  ) / radius"
+   name Expression8
+   xpos 197
+   ypos 478
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.mode}}
+   name Switch3
+   xpos 197
+   ypos 564
+  }
+  Grade {
+   name Grade20
+   xpos 197
+   ypos 604
+  }
+set Nb19ccbe0 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression9
+   xpos 117
+   ypos 650
+  }
+  Dot {
+   name Dot4
+   label expo
+   xpos 151
+   ypos 691
+  }
+push $Nb19ccbe0
+  Dot {
+   name Dot37
+   xpos 338
+   ypos 650
+  }
+  Dot {
+   name Dot5
+   label linear
+   xpos 338
+   ypos 686
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.fotype}}
+   name Switch1
+   xpos 201
+   ypos 720
+  }
+  Grade {
+   black_clamp false
+   name Grade12
+   xpos 201
+   ypos 775
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle8
+   label "\[value in]"
+   xpos 201
+   ypos 812
+  }
+  Dot {
+   name Dot32
+   xpos 235
+   ypos 962
+  }
+set Nb12c42e0 [stack 0]
+  Dot {
+   name Dot41
+   xpos 235
+   ypos 1011
+  }
+push $Nb1ec0100
+  Dot {
+   name Dot39
+   xpos 480
+   ypos 402
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 512
+   temp_name1 centery
+   temp_expr1 512
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   expr0 "sqrt(  pow2((x/width*1024)-centerx)+pow2((y/height*1024)-centery) )"
+   name Expression28
+   xpos 446
+   ypos 526
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression29
+   xpos 446
+   ypos 568
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge10
+   xpos 446
+   ypos 1007
+   disable {{1-parent.MasterControl.focm}}
+  }
+  Dot {
+   name Dot40
+   xpos 480
+   ypos 1070
+  }
+push $Nb12c42e0
+push $Nb1bcc550
+  Dot {
+   name Dot38
+   xpos 608
+   ypos 381
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x/width*1920
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y/height*1080
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt(  pow2(((x/width*1920)-centerx)*(1/sw))+pow2(((y/height*1080)-centery)*(1/sh)) )"
+   name Expression2
+   xpos 574
+   ypos 501
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression3
+   xpos 574
+   ypos 544
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge3
+   xpos 574
+   ypos 958
+   disable {{1-parent.MasterControl.fo}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch10
+   xpos 574
+   ypos 1066
+  }
+  Grade {
+   multiply 1000
+   black_clamp false
+   name Grade1
+   xpos 574
+   ypos 1189
+  }
+  Clamp {
+   maximum 2000
+   name Clamp1
+   xpos 574
+   ypos 1237
+  }
+  Dot {
+   name Dot21
+   xpos 608
+   ypos 1358
+  }
+set Nb0dcf0f0 [stack 0]
+  Grade {
+   black_clamp false
+   name Grade4
+   xpos -675
+   ypos 1354
+  }
+push $Nb1fcb020
+  Dot {
+   name Dot24
+   xpos -656
+   ypos 96
+  }
+  Dot {
+   name Dot22
+   xpos -1105
+   ypos 96
+  }
+set Nf5a20780 [stack 0]
+  Dot {
+   name Dot29
+   xpos -1739
+   ypos 186
+  }
+set Nf5a25bb0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression24
+   xpos -1691
+   ypos 262
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression25
+   xpos -1691
+   ypos 326
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade11
+   xpos -1691
+   ypos 412
+  }
+push $Nf5a25bb0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )) / (pi*2)"
+   name Expression26
+   xpos -1859
+   ypos 254
+  }
+  Dot {
+   name Dot33
+   xpos -1825
+   ypos 510
+  }
+push $Nf5a20780
+  Dot {
+   name Dot25
+   xpos -1105
+   ypos 283
+  }
+set Nb0ac4040 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   expr0 "atan(x - centerx , y - centery)/pi"
+   name Expression15
+   xpos -1139
+   ypos 451
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy3
+   xpos -1139
+   ypos 500
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Dot {
+   name Dot27
+   xpos -1105
+   ypos 552
+  }
+push $Nb1bc7700
+  Dot {
+   name Dot23
+   xpos -935
+   ypos 174
+  }
+set Nb08ca6e0 [stack 0]
+  Dot {
+   name Dot28
+   xpos -1351
+   ypos 186
+  }
+set Nb08cf8b0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression21
+   xpos -1303
+   ypos 258
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression22
+   xpos -1303
+   ypos 308
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade6
+   xpos -1303
+   ypos 355
+  }
+push $Nb08cf8b0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )  ) / (pi*2)"
+   name Expression23
+   xpos -1474
+   ypos 252
+  }
+  Dot {
+   name Dot34
+   xpos -1440
+   ypos 428
+  }
+push $Nb08ca6e0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression4
+   xpos -969
+   ypos 377
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy2
+   xpos -969
+   ypos 418
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch5
+   xpos -969
+   ypos 548
+  }
+set Nf5418890 [stack 0]
+push $Nb0ac4040
+  Expression {
+   temp_name0 cx
+   temp_expr0 width/2
+   temp_name1 cy
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression16
+   xpos -756
+   ypos 408
+  }
+push $Nb08ca6e0
+  Dot {
+   name Dot26
+   xpos -612
+   ypos 266
+  }
+  Expression {
+   temp_name0 cx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 cy
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression19
+   xpos -646
+   ypos 408
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch9
+   xpos -646
+   ypos 475
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy1
+   xpos -646
+   ypos 542
+  }
+set Nb05c3920 [stack 0]
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset+3, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression20
+   xpos -393
+   ypos 604
+  }
+push $Nb05c3920
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r-g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression18
+   xpos -530
+   ypos 607
+  }
+push $Nb05c3920
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r+g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression17
+   xpos -646
+   ypos 610
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge8
+   xpos -605
+   ypos 660
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge9
+   xpos -605
+   ypos 709
+  }
+  Dot {
+   name Dot35
+   xpos -571
+   ypos 781
+  }
+push $Nf5418890
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/width))*2*parent.NoiseControl.posspeed
+   expr0 "fBm(r*parent.NoiseControl.detail , y, parent.NoiseControl.zoffset, oct, lac, gain)"
+   name Expression14
+   xpos -969
+   ypos 623
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge7
+   xpos -969
+   ypos 777
+  }
+  Grade {
+   name Grade2
+   xpos -969
+   ypos 869
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge4
+   xpos -969
+   ypos 1354
+  }
+  Clamp {
+   maximum 2000
+   name Clamp2
+   xpos -969
+   ypos 1511
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle7
+   label "\[value in]"
+   xpos -969
+   ypos 1576
+  }
+  Grade {
+   multiply 0
+   black_clamp false
+   name Grade3
+   xpos -969
+   ypos 1635
+  }
+  Dot {
+   name Dot30
+   xpos -935
+   ypos 1921
+  }
+push $Nb0dcf0f0
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle6
+   label "\[value in]"
+   xpos 574
+   ypos 1515
+  }
+  Grade {
+   multiply 3
+   black_clamp false
+   name Grade16
+   xpos 574
+   ypos 1588
+  }
+  Dot {
+   name Dot31
+   xpos 608
+   ypos 1687
+  }
+push $Nb0dcf0f0
+push $Nb1fc61d0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 spdist
+   temp_expr2 (width/2-10)*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2(x-centerx)+pow2(y-centery)  ) -spdist ) / spdist"
+   name Expression11
+   xpos 156
+   ypos -377
+  }
+push $Nb1bc28b0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 spdist
+   temp_expr2 parent.MasterControl.radius*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2((x-centerx)*(1/parent.MasterControl.scale.0))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  ) -spdist ) / spdist"
+   name Expression6
+   xpos 334
+   ypos -403
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch4
+   xpos 334
+   ypos -368
+  }
+  Grade {
+   name Grade8
+   xpos 334
+   ypos -323
+  }
+set Naf1c3c80 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression7
+   xpos 254
+   ypos -279
+  }
+  Dot {
+   name Dot3
+   label expo
+   xpos 288
+   ypos -241
+  }
+push $Naf1c3c80
+  Dot {
+   name Dot2
+   label linear
+   xpos 440
+   ypos -271
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.sfotype}}
+   name Switch7
+   xpos 343
+   ypos -206
+  }
+  Grade {
+   black_clamp false
+   name Grade10
+   xpos 343
+   ypos -172
+  }
+set Naeec4d10 [stack 0]
+  Grade {
+   multiply {{parent.MasterControl.sthk}}
+   black_clamp false
+   name Grade13
+   xpos 343
+   ypos -117
+  }
+set Naecc5b00 [stack 0]
+push $Naeec4d10
+push $Nb20cc570
+  Dot {
+   name Dot42
+   xpos 750
+   ypos -822
+  }
+set Naebc6730 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r+(2*pi/nr))  *(nr/2))"
+   name Expression30
+   xpos 730
+   ypos -726
+  }
+push $Nb1ccd920
+  Dot {
+   name Dot36
+   xpos 981
+   ypos -893
+  }
+set Naeac9ab0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r+(2*pi/nr))  * (nr/2))"
+   name Expression12
+   xpos 1026
+   ypos -809
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch11
+   xpos 1026
+   ypos -658
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression32
+   xpos 1026
+   ypos -588
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy6
+   xpos 1026
+   ypos -110
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression34
+   xpos 1026
+   ypos -21
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge14
+   xpos 1026
+   ypos 37
+  }
+  Grade {
+   blackpoint {{Grade9.blackpoint}}
+   blackpoint_panelDropped {{Grade9.blackpoint_panelDropped}}
+   whitepoint {{Grade9.whitepoint}}
+   whitepoint_panelDropped {{Grade9.whitepoint_panelDropped}}
+   black {{Grade9.black}}
+   black_panelDropped {{Grade9.black_panelDropped}}
+   white {{Grade9.white}}
+   white_panelDropped {{Grade9.white_panelDropped}}
+   multiply {{Grade9.multiply}}
+   multiply_panelDropped {{Grade9.multiply_panelDropped}}
+   add {{Grade9.add}}
+   add_panelDropped {{Grade9.add_panelDropped}}
+   gamma {{Grade9.gamma}}
+   gamma_panelDropped {{Grade9.gamma_panelDropped}}
+   reverse {{Grade9.reverse}}
+   black_clamp {{Grade9.black_clamp}}
+   white_clamp {{Grade9.white_clamp}}
+   inject {{Grade9.inject}}
+   invert_mask {{Grade9.invert_mask}}
+   fringe {{Grade9.fringe}}
+   process_mask {{Grade9.process_mask}}
+   invert_unpremult {{Grade9.invert_unpremult}}
+   enable_mix_luminance {{Grade9.enable_mix_luminance}}
+   mix_luminance {{Grade9.mix_luminance}}
+   mix {{Grade9.mix}}
+   name Grade19
+   xpos 1026
+   ypos 116
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge2
+   xpos 1046
+   ypos 1309
+  }
+  Grade {
+   gamma 0.63
+   name Grade5
+   label "odd ray grade"
+   xpos 1046
+   ypos 1372
+  }
+push $Nb0dcf0f0
+push $Naecc5b00
+push $Naeec4d10
+push $Naebc6730
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r)  * (nr/2))"
+   name Expression1
+   xpos 564
+   ypos -716
+  }
+push $Naeac9ab0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r)  * (nr/2))"
+   name Expression5
+   xpos 838
+   ypos -807
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch8
+   xpos 838
+   ypos -653
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression31
+   xpos 838
+   ypos -583
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy5
+   xpos 838
+   ypos -178
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression33
+   xpos 838
+   ypos -89
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge13
+   xpos 838
+   ypos -33
+  }
+  Grade {
+   multiply 0.51
+   add {{parent.MasterControl.thickness}}
+   white_clamp true
+   name Grade9
+   xpos 838
+   ypos 81
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge1
+   xpos 838
+   ypos 1354
+  }
+  Merge2 {
+   inputs 2
+   operation max
+   name Merge11
+   xpos 923
+   ypos 1444
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle1
+   label "\[value in]"
+   xpos 923
+   ypos 1510
+  }
+  Grade {
+   multiply 0
+   black_clamp false
+   name Grade15
+   xpos 923
+   ypos 1592
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge6
+   xpos 923
+   ypos 1683
+   disable {{1-parent.MasterControl.boolean}}
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge5
+   xpos 923
+   ypos 1917
+   disable {{1-parent.MasterControl.boolean_2}}
+  }
+  Shuffle {
+   alpha black
+   name Shuffle2
+   label "\[value in]"
+   xpos 923
+   ypos 2293
+  }
+  Grade {
+   gamma 0.9
+   black_clamp false
+   name Grade14
+   xpos 923
+   ypos 2637
+  }
+  Dot {
+   name Dot17
+   xpos 957
+   ypos 2874
+  }
+set Nacccc8e0 [stack 0]
+  Transform {
+   scale {{parent.Reformat3.scale.0} {parent.Reformat3.scale.1}}
+   center {{width/2} {height/2}}
+   filter Mitchell
+   name Transform1
+   label scale
+   xpos 1096
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {1.2 1}
+   resize none
+   filter Lanczos4
+   name Reformat3
+   label "scale format"
+   xpos 1221
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {{parent.MasterControl.radius/200}}
+   filter Lanczos4
+   name Reformat2
+   label radius
+   xpos 1338
+   ypos 2864
+  }
+  Shuffle {
+   alpha white
+   name Shuffle4
+   label "\[value in]"
+   xpos 1448
+   ypos 2864
+  }
+set Nac9cf830 [stack 0]
+push $Nac9cf830
+  Shuffle {
+   alpha white
+   name Shuffle10
+   label "\[value in]"
+   xpos 1552
+   ypos 2864
+   disable {{parent.togglefix}}
+  }
+  Grade {
+   multiply 1e-05
+   black_clamp false
+   name Grade17
+   label normalize
+   xpos 1662
+   ypos 2864
+  }
+push $Nb22cba50
+  Shuffle {
+   alpha white
+   name Shuffle3
+   label "\[value in]"
+   xpos 1792
+   ypos 2574
+  }
+  Convolve2 {
+   inputs 2
+   channels rgba
+   filter_channel rgba.red
+   use_input_channels true
+   normalize false
+   name Convolve1
+   xpos 1792
+   ypos 2870
+  }
+  Shuffle {
+   alpha black
+   name Shuffle9
+   label "\[value in]"
+   xpos 1792
+   ypos 2919
+  }
+  Crop {
+   box {0 0 {input.width} {input.height}}
+   name Crop1
+   xpos 1792
+   ypos 2993
+   disable {{1-parent.MasterControl.boolean_1}}
+  }
+push $Nacccc8e0
+  Switch {
+   inputs 3
+   which {{parent.Switch3.which}}
+   name Switch2
+   xpos 1380
+   ypos 3232
+  }
+  Output {
+   name Output1
+   xpos 1380
+   ypos 3336
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote1
+   label "   create rays    "
+   note_font_size 40
+   xpos 1188
+   ypos -730
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote2
+   label "    spread    "
+   note_font_size 40
+   xpos 1168
+   ypos -103
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote3
+   label "   create glow    "
+   note_font_size 40
+   xpos 642
+   ypos 592
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote5
+   label "    falloff to zero    "
+   note_font_size 40
+   xpos 117
+   ypos 1047
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote6
+   label "    convolve    "
+   note_font_size 40
+   xpos 1557
+   ypos 2747
+  }
+ end_group
+ Grade {
+  white {1.466199994 1.340222597 1.099650025 1}
+  name Grade10
+  xpos -1049
+  ypos 127
+ }
+set Nabd361a0 [stack 0]
+ Multiply {
+  value {{parent.Dynamic_Trigger2.centtriggerexp}}
+  name Multiply5
+  label "\[value value]"
+  xpos -1247
+  ypos 236
+ }
+ Dot {
+  name Dot16
+  xpos -1213
+  ypos 451
+ }
+push $Nabd361a0
+ Multiply {
+  value {{parent.Dynamic_Trigger2.botriggerexp}}
+  name Multiply4
+  label "\[value value]"
+  xpos -1049
+  ypos 241
+ }
+ Grade {
+  multiply 2
+  name Grade11
+  xpos -1049
+  ypos 342
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  name Merge11
+  xpos -1049
+  ypos 447
+ }
+ Dot {
+  name Dot15
+  xpos -1015
+  ypos 632
+ }
+push $N411cc30
+ Group {
+  name FlareSuperStar
+  label "main core"
+  selected true
+  xpos -887
+  ypos 46
+  addUserKnob {20 User l "Shape Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {26 _3 l "Global Controls"}
+  addUserKnob {41 mode t "the mode in which the tool operates.\nPosition: the flare gets generated at the defined position\nConvolve: the flare gets applied via a convolve of the input image\nOutput Kernel: outputs the kernel that would get feeded into the convolve so you could make further adjustetments and apply as your custom filter to your node of choice" T MasterControl.mode}
+  addUserKnob {41 center t "defines the center where the flare gets created if in position-mode." -STARTLINE T MasterControl.center}
+  addUserKnob {6 togglefix l "toggle to fix \"missing channel\" error caused by the convolve" t "Sometimes, when in convolve-mode, the tool gives a \"missing channel\" error. This is a dirty workaround to fix it. It might occure again, then toggle the checkbox again." +STARTLINE}
+  addUserKnob {41 multiply_1 l intensity t "global intensity" T MasterControl.multiply_1}
+  addUserKnob {41 gamma_2_1 l gamma t "global gamma" T MasterControl.gamma_2}
+  addUserKnob {41 scale t "changes the x and y scale of the flare around the center point." T MasterControl.scale}
+  addUserKnob {41 relativeradius l radius t "Controls the kernel size if in konvolve mode and the radius at which the flare will be zero if falloff to zero is enabled.\nThis is a factor of the image width." T MasterControl.relativeradius}
+  addUserKnob {26 ""}
+  addUserKnob {26 "" l "Ray Controls"}
+  addUserKnob {41 nr l "number of rays" t "Sets the number of rays that will be generated by the flare." T MasterControl.nr}
+  addUserKnob {41 gamma_4 l "odd ray length" t xfgjxfhjc T Grade5.gamma}
+  addUserKnob {26 text_3 l "" +STARTLINE T "doesn't actually change the length of the rays,\nbut applies a gamma correction"}
+  addUserKnob {41 rotation t "Controls the Rotation of the rays." T MasterControl.rotation}
+  addUserKnob {41 multiply_2 l "ray intensity" t "Controls intensity of the rays." T MasterControl.multiply_2}
+  addUserKnob {41 gamma_3 l "ray gamma" t "Controls the gamma of the rays." T MasterControl.gamma_3}
+  addUserKnob {41 thickness t "Lets you adjust the thickness of the rays." T MasterControl.thickness}
+  addUserKnob {41 multiply l softness t "Lets you control the softness of the rays." T MasterControl.multiply}
+  addUserKnob {41 coneangle l "Cone angle" t "Controls the angle of the rays." T MasterControl.coneangle}
+  addUserKnob {26 "" l "Spread Controls"}
+  addUserKnob {41 sdistn l "spread distance" t "Distance at which the spread will start. This is a factor of the global radius." T MasterControl.sdistn}
+  addUserKnob {26 text_2 l "" +STARTLINE T "The spread distance is a factor of the radius."}
+  addUserKnob {41 ssize l "spread angle" t "Spreads the rays via changing their angle from the spreaddistance outwards." T MasterControl.ssize}
+  addUserKnob {41 sthk l "spread thickness" t "Changes the thickness of the rays from the spreaddistance outwards." T MasterControl.sthk}
+  addUserKnob {41 sfotype l "spread falloff type" t "Lets you choose between a linear or an exponential falloff of the spread." T MasterControl.sfotype}
+  addUserKnob {41 gamma l "" t "Gamma control for the spread falloff." -STARTLINE T MasterControl.gamma}
+  addUserKnob {26 ""}
+  addUserKnob {41 boolean l "Enable inner Glow" T MasterControl.boolean}
+  addUserKnob {41 boolean_2 l "Enable Glare" T MasterControl.boolean_2}
+  addUserKnob {41 boolean_1 l "Crop convolve" t "Crops the result to the image format in convolve mode to reduce boundingbox size." T MasterControl.boolean_1}
+  addUserKnob {26 ""}
+  addUserKnob {26 _1 l "" +STARTLINE T "FlareSuperStar v1.2\nby Lukas Fabian - December 2020"}
+  addUserKnob {20 tab l "Glare Controls"}
+  addUserKnob {26 ""}
+  addUserKnob {41 Intensity l intensity t "Controls intensity of the glare." T NoiseControl.Intensity}
+  addUserKnob {41 gamma_1_1 l gamma t "Controls gamma of the glare." T NoiseControl.gamma_1}
+  addUserKnob {26 ""}
+  addUserKnob {41 detail t "Controls the ray detail of the glare." T NoiseControl.detail}
+  addUserKnob {41 z1 l z t "zOffset for the ray-detail." T NoiseControl.z1}
+  addUserKnob {41 detail_1 l detail2 t "Controls additional detail for the rays outwards." T NoiseControl2.detail}
+  addUserKnob {41 z1_1 l z2 t "zOffset for detail2." T NoiseControl2.z1}
+  addUserKnob {41 sfix l "Enable seam fix" t "If disabled there could be a visible 0-1 in the glare. Also changes the bottom part of the glare appearence. Just try which setting suits your situation." T NoiseControl.sfix}
+  addUserKnob {26 ""}
+  addUserKnob {41 speed l "shimmer speed" t "If set to anything bigger then zero the glare will shimmer over time. The bigger the value the faster the shimmer." T NoiseControl.speed}
+  addUserKnob {41 posspeed l "position change speed" t "Only works properly in position-mode.\nIf the center-position of the flare is changed, the glare will change its shape.\nThe higher the number the bigger the change. If it´s set to zero there won´t be any change in the glare due to position changes." T NoiseControl.posspeed}
+  addUserKnob {20 tab_1 l "Glow Controls"}
+  addUserKnob {26 _2 l "" +STARTLINE}
+  addUserKnob {41 multiply_3 l "glow intensity" t "Controls the intensity of the glow." T Grade16.multiply}
+  addUserKnob {41 gamma_2 l "glow gamma" t "Controls the gamma of the glow." T Grade16.gamma}
+  addUserKnob {20 fotz l "Falloff to Zero"}
+  addUserKnob {26 ""}
+  addUserKnob {26 text l "" +STARTLINE T "If \"falloff to zero\" is enabled, the flare will be zero at the point defined by \nthe global radius. If \"fall off to zero\" is disabled it results in an inverse square\nfalloff, this might introduce edges in convolve-mode.\n\nUsually you want to have it on in convolve-mode, and off in position mode.\n\n"}
+  addUserKnob {26 text_1 l "Falloff to Zero"}
+  addUserKnob {41 fo l "enable in position mode" T MasterControl.fo}
+  addUserKnob {41 focm l "enable in convolve mode" T MasterControl.focm}
+  addUserKnob {41 fotype l "falloff type" t "Lets you choose between a linear or an exponential falloff." T MasterControl.fotype}
+  addUserKnob {41 gamma_1 l "" t "Gammacontrol for the falloff." -STARTLINE T MasterControl.gamma_1}
+  addUserKnob {26 ""}
+ }
+  BackdropNode {
+   inputs 0
+   name BackdropNode1
+   tile_color 0x71c67100
+   label Controlers
+   note_font_size 42
+   xpos 2321
+   ypos -1190
+   bdwidth 855
+   bdheight 322
+  }
+  Grade {
+   inputs 0
+   multiply 0.1
+   black_clamp false
+   name AngleControl
+   xpos 2440
+   ypos -1028
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote4
+   label "   create glare    "
+   note_font_size 40
+   xpos -1067
+   ypos -10
+  }
+  Grade {
+   inputs 0
+   black_clamp false
+   name ARControl
+   xpos 2697
+   ypos -1029
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/150)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl
+   xpos 2824
+   ypos -1028
+   addUserKnob {20 User l Controls}
+   addUserKnob {7 z1 l z}
+   z1 1
+   addUserKnob {7 speed l "shimmer speed" R 0 5}
+   addUserKnob {7 detail}
+   detail 15
+   addUserKnob {41 Intensity l intensity T Grade3.multiply}
+   addUserKnob {41 gamma_1 l gamma T Grade4.gamma}
+   addUserKnob {7 posspeed l "position speed" R 0 5}
+   posspeed 2
+   addUserKnob {6 sfix l "Enable seam fix" +STARTLINE}
+   sfix true
+  }
+  Noise {
+   inputs 0
+   replace true
+   zoffset {{z1+frame*(speed/100)}}
+   translate {13800.29102 822.1937866}
+   center {2275 1208}
+   name NoiseControl2
+   xpos 2959
+   ypos -1034
+   addUserKnob {20 User l "z Controls"}
+   addUserKnob {7 z1 l z}
+   z1 1
+   addUserKnob {7 speed}
+   speed {{parent.NoiseControl.speed}}
+   addUserKnob {7 detail l detail2}
+   detail 10
+  }
+  Input {
+   inputs 0
+   name img
+   xpos 1386
+   ypos -1284
+  }
+  Dot {
+   name Dot19
+   xpos 1420
+   ypos -1215
+  }
+  Dot {
+   name Dot11
+   xpos 1420
+   ypos -1090
+  }
+set Nab02e3b0 [stack 0]
+  Dot {
+   name Dot18
+   xpos 1826
+   ypos -1090
+  }
+set Nab033190 [stack 0]
+  NoOp {
+   name MasterControl
+   xpos 2579
+   ypos -1035
+   addUserKnob {20 User l Controls}
+   addUserKnob {26 _1 l "" +STARTLINE}
+   addUserKnob {26 _4 l "General Controls"}
+   addUserKnob {4 mode M {Position Convolve "Output Kernel" ""}}
+   addUserKnob {12 center -STARTLINE}
+   center {{parent.parent.NoOp1.position_2d} {parent.parent.NoOp1.position_2d}}
+   addUserKnob {41 multiply_1 l intensity T Grade14.multiply}
+   addUserKnob {41 gamma_2 l gamma T Grade14.gamma}
+   addUserKnob {3 nr l "number of rays"}
+   nr 18
+   addUserKnob {41 scale T Reformat3.scale}
+   addUserKnob {7 rotation R 0 360}
+   rotation 13
+   addUserKnob {7 radius l "absolute radius" R 1 1000}
+   radius {{(width/8)*(relativeradius+0.0000001)}}
+   addUserKnob {7 relativeradius l radius R 0 10}
+   relativeradius 1
+   addUserKnob {4 fotype l "falloff type" M {linear exponential}}
+   fotype exponential
+   addUserKnob {41 gamma_1 l "" -STARTLINE T Grade12.gamma}
+   addUserKnob {6 fo l "disable falloff" +STARTLINE}
+   addUserKnob {6 focm l "enable in convolve mode" +STARTLINE}
+   focm true
+   addUserKnob {26 _2 l "" +STARTLINE}
+   addUserKnob {26 _5 l "Ray Controls"}
+   addUserKnob {41 multiply_2 l "ray intensity" T Grade15.multiply}
+   addUserKnob {41 gamma_3 l "ray gamma" T Grade15.gamma}
+   addUserKnob {7 thickness R -2 2}
+   addUserKnob {41 multiply l softness T Grade9.multiply}
+   addUserKnob {41 coneangle l "cone angle" T AngleControl.multiply}
+   addUserKnob {26 _3 l "" +STARTLINE}
+   addUserKnob {26 _6 l "Spread Controls"}
+   addUserKnob {7 sdist l "spread distance safe" R 0.0001 1}
+   sdist {{sdistn+0.000001}}
+   addUserKnob {7 sdistn l "spread distance"}
+   sdistn 0.185
+   addUserKnob {7 ssize l "spread angle" R -2 2}
+   addUserKnob {7 sthk l "spread thickness" R -2 2}
+   addUserKnob {4 sfotype l "spread falloff type" M {linear exponential}}
+   addUserKnob {41 gamma l "" -STARTLINE T Grade10.gamma}
+   addUserKnob {26 ""}
+   addUserKnob {6 boolean l "Enable inner Flare" +STARTLINE}
+   boolean true
+   addUserKnob {6 boolean_2 l "enable glare" +STARTLINE}
+   boolean_2 true
+   addUserKnob {6 boolean_1 l "Crop convolve" +STARTLINE}
+   boolean_1 true
+  }
+  Reformat {
+   inputs 0
+   format "1024 1024 0 0 1024 1024 1 square_1K"
+   box_width 2000
+   filter Lanczos4
+   name Reformat1
+   xpos 716
+   ypos -1000
+  }
+  Dot {
+   name Dot7
+   xpos 750
+   ypos -937
+  }
+set Nf531ddd0 [stack 0]
+  Dot {
+   name Dot8
+   xpos -150
+   ypos -937
+  }
+  Dot {
+   name Dot10
+   xpos -150
+   ypos -421
+  }
+set Nf5217900 [stack 0]
+  Dot {
+   name Dot20
+   xpos -150
+   ypos 96
+  }
+set Nf521c750 [stack 0]
+  Dot {
+   name Dot16
+   xpos -150
+   ypos 402
+  }
+set Nf52215a0 [stack 0]
+  Dot {
+   name Dot9
+   xpos -150
+   ypos 550
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 radius
+   temp_expr2 (width/2)-10
+   expr0 "(radius - sqrt(  pow2(x-centerx)+pow2(y-centery)  )  ) / radius"
+   name Expression13
+   xpos 26
+   ypos 546
+  }
+push $Nab02e3b0
+  Dot {
+   name Dot12
+   xpos -17
+   ypos -1090
+  }
+  Shuffle {
+   red black
+   green black
+   blue black
+   alpha black
+   name Shuffle5
+   label "\[value in]"
+   xpos -51
+   ypos -1005
+  }
+  Dot {
+   name Dot13
+   xpos -17
+   ypos -893
+  }
+set Naae35030 [stack 0]
+  Dot {
+   name Dot14
+   xpos -17
+   ypos -510
+  }
+set Naae39eb0 [stack 0]
+  Dot {
+   name Dot6
+   xpos -17
+   ypos 174
+  }
+set Naad2ee10 [stack 0]
+  Dot {
+   name Dot1
+   xpos -17
+   ypos 381
+  }
+set Naad33c60 [stack 0]
+  Dot {
+   name Dot15
+   xpos -17
+   ypos 483
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   temp_name3 sw
+   temp_expr3 parent.MasterControl.scale.0
+   expr0 "(radius - sqrt(  pow2((x-centerx)*(1/sw))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  )  ) / radius"
+   name Expression8
+   xpos 197
+   ypos 478
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.mode}}
+   name Switch3
+   xpos 197
+   ypos 564
+  }
+  Grade {
+   name Grade20
+   xpos 197
+   ypos 604
+  }
+set Naab342f0 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression9
+   xpos 117
+   ypos 650
+  }
+  Dot {
+   name Dot4
+   label expo
+   xpos 151
+   ypos 691
+  }
+push $Naab342f0
+  Dot {
+   name Dot37
+   xpos 338
+   ypos 650
+  }
+  Dot {
+   name Dot5
+   label linear
+   xpos 338
+   ypos 686
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.fotype}}
+   name Switch1
+   xpos 201
+   ypos 720
+  }
+  Grade {
+   black_clamp false
+   name Grade12
+   xpos 201
+   ypos 775
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle8
+   label "\[value in]"
+   xpos 201
+   ypos 812
+  }
+  Dot {
+   name Dot32
+   xpos 235
+   ypos 962
+  }
+set Nf4d258b0 [stack 0]
+  Dot {
+   name Dot41
+   xpos 235
+   ypos 1011
+  }
+push $Nf52215a0
+  Dot {
+   name Dot39
+   xpos 480
+   ypos 402
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 512
+   temp_name1 centery
+   temp_expr1 512
+   temp_name2 radius
+   temp_expr2 parent.MasterControl.radius
+   expr0 "sqrt(  pow2((x/width*1024)-centerx)+pow2((y/height*1024)-centery) )"
+   name Expression28
+   xpos 446
+   ypos 526
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression29
+   xpos 446
+   ypos 568
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge10
+   xpos 446
+   ypos 1007
+   disable {{1-parent.MasterControl.focm}}
+  }
+  Dot {
+   name Dot40
+   xpos 480
+   ypos 1070
+  }
+push $Nf4d258b0
+push $Naad33c60
+  Dot {
+   name Dot38
+   xpos 608
+   ypos 381
+  }
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x/width*1920
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y/height*1080
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt(  pow2(((x/width*1920)-centerx)*(1/sw))+pow2(((y/height*1080)-centery)*(1/sh)) )"
+   name Expression2
+   xpos 574
+   ypos 501
+  }
+  Expression {
+   expr0 isnan(r)?0:1/(r*r)
+   name Expression3
+   xpos 574
+   ypos 544
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge3
+   xpos 574
+   ypos 958
+   disable {{1-parent.MasterControl.fo}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch10
+   xpos 574
+   ypos 1066
+  }
+  Grade {
+   multiply 1000
+   black_clamp false
+   name Grade1
+   xpos 574
+   ypos 1189
+  }
+  Clamp {
+   maximum 2000
+   name Clamp1
+   xpos 574
+   ypos 1237
+  }
+  Dot {
+   name Dot21
+   xpos 608
+   ypos 1358
+  }
+set N562bc780 [stack 0]
+  Grade {
+   gamma 0.9
+   black_clamp false
+   name Grade4
+   xpos -675
+   ypos 1354
+  }
+push $Nf521c750
+  Dot {
+   name Dot24
+   xpos -656
+   ypos 96
+  }
+  Dot {
+   name Dot22
+   xpos -1105
+   ypos 96
+  }
+set N55fb6e10 [stack 0]
+  Dot {
+   name Dot29
+   xpos -1739
+   ypos 186
+  }
+set N55fbc240 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression24
+   xpos -1691
+   ypos 262
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression25
+   xpos -1691
+   ypos 326
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade11
+   xpos -1691
+   ypos 412
+  }
+push $N55fbc240
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )) / (pi*2)"
+   name Expression26
+   xpos -1859
+   ypos 254
+  }
+  Dot {
+   name Dot33
+   xpos -1825
+   ypos 510
+  }
+push $N55fb6e10
+  Dot {
+   name Dot25
+   xpos -1105
+   ypos 283
+  }
+set N55ac15c0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   expr0 "atan(x - centerx , y - centery)/pi"
+   name Expression15
+   xpos -1139
+   ypos 451
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy3
+   xpos -1139
+   ypos 500
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Dot {
+   name Dot27
+   xpos -1105
+   ypos 552
+  }
+push $Naad2ee10
+  Dot {
+   name Dot23
+   xpos -935
+   ypos 174
+  }
+set N557b7d90 [stack 0]
+  Dot {
+   name Dot28
+   xpos -1351
+   ypos 186
+  }
+set N557bcf40 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression21
+   xpos -1303
+   ypos 258
+  }
+  Expression {
+   expr0 sqrt(pow2(r))
+   name Expression22
+   xpos -1303
+   ypos 308
+  }
+  Grade {
+   blackpoint 0.6
+   name Grade6
+   xpos -1303
+   ypos 355
+  }
+push $N557bcf40
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "(atan(    (x - centerx)*(1/sw) , (-y -- centery)*(1/sh) )  ) / (pi*2)"
+   name Expression23
+   xpos -1474
+   ypos 252
+  }
+  Dot {
+   name Dot34
+   xpos -1440
+   ypos 428
+  }
+push $N557b7d90
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "atan((x - centerx)*(1/sw) , (y - centery)*(1/sh))/pi"
+   name Expression4
+   xpos -969
+   ypos 377
+  }
+  Copy {
+   inputs 2+1
+   from0 rgba.red
+   to0 rgba.red
+   maskChannelMask rgba.red
+   name Copy2
+   xpos -969
+   ypos 418
+   disable {{1-parent.NoiseControl.sfix}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch5
+   xpos -969
+   ypos 548
+  }
+set Nf4a22e70 [stack 0]
+push $N55ac15c0
+  Expression {
+   temp_name0 cx
+   temp_expr0 width/2
+   temp_name1 cy
+   temp_expr1 height/2
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression16
+   xpos -756
+   ypos 408
+  }
+push $N557b7d90
+  Dot {
+   name Dot26
+   xpos -612
+   ypos 266
+  }
+  Expression {
+   temp_name0 cx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 cy
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 sw
+   temp_expr2 parent.MasterControl.scale.0
+   temp_name3 sh
+   temp_expr3 parent.MasterControl.scale.1
+   expr0 "sqrt( pow2( ((x-cx)*(1/sw))/width ) + pow2( ((y-cy)*(1/sh))/width )  )"
+   name Expression19
+   xpos -646
+   ypos 408
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch9
+   xpos -646
+   ypos 475
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy1
+   xpos -646
+   ypos 542
+  }
+set N551c0f40 [stack 0]
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset+3, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression20
+   xpos -393
+   ypos 604
+  }
+push $N551c0f40
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r-g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression18
+   xpos -530
+   ypos 607
+  }
+push $N551c0f40
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/height))*2*parent.NoiseControl.posspeed
+   expr0 "fBm((r+g)*parent.NoiseControl2.detail , y, parent.NoiseControl2.zoffset, oct, lac, gain)"
+   expr1 0
+   expr2 0
+   expr3 0
+   name Expression17
+   xpos -646
+   ypos 610
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge8
+   xpos -605
+   ypos 660
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge9
+   xpos -605
+   ypos 709
+  }
+  Dot {
+   name Dot35
+   xpos -571
+   ypos 781
+  }
+push $Nf4a22e70
+  Expression {
+   temp_name0 oct
+   temp_expr0 parent.NoiseControl.octaves
+   temp_name1 lac
+   temp_expr1 parent.NoiseControl.lacunarity
+   temp_name2 gain
+   temp_expr2 parent.NoiseControl.gain
+   temp_name3 y
+   temp_expr3 ((parent.MasterControl.center.x/width)+(parent.MasterControl.center.y/width))*2*parent.NoiseControl.posspeed
+   expr0 "fBm(r*parent.NoiseControl.detail , y, parent.NoiseControl.zoffset, oct, lac, gain)"
+   name Expression14
+   xpos -969
+   ypos 623
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   mix 0.5
+   name Merge7
+   xpos -969
+   ypos 777
+  }
+  Grade {
+   name Grade2
+   xpos -969
+   ypos 869
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge4
+   xpos -969
+   ypos 1354
+  }
+  Clamp {
+   maximum 2000
+   name Clamp2
+   xpos -969
+   ypos 1511
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle7
+   label "\[value in]"
+   xpos -969
+   ypos 1576
+  }
+  Grade {
+   multiply 0.3
+   black_clamp false
+   name Grade3
+   xpos -969
+   ypos 1635
+  }
+  Dot {
+   name Dot30
+   xpos -935
+   ypos 1921
+  }
+push $N562bc780
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle6
+   label "\[value in]"
+   xpos 574
+   ypos 1515
+  }
+  Grade {
+   black_clamp false
+   name Grade16
+   xpos 574
+   ypos 1588
+  }
+  Dot {
+   name Dot31
+   xpos 608
+   ypos 1687
+  }
+push $N562bc780
+push $Nf5217900
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 spdist
+   temp_expr2 (width/2-10)*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2(x-centerx)+pow2(y-centery)  ) -spdist ) / spdist"
+   name Expression11
+   xpos 156
+   ypos -377
+  }
+push $Naae39eb0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 spdist
+   temp_expr2 parent.MasterControl.radius*parent.MasterControl.sdist
+   expr0 "(sqrt(  pow2((x-centerx)*(1/parent.MasterControl.scale.0))+pow2((y-centery)*(1/parent.MasterControl.scale.1))  ) -spdist ) / spdist"
+   name Expression6
+   xpos 334
+   ypos -403
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch4
+   xpos 334
+   ypos -368
+  }
+  Grade {
+   name Grade8
+   xpos 334
+   ypos -323
+  }
+set N53fc1290 [stack 0]
+  Expression {
+   expr0 pow2(r)
+   name Expression7
+   xpos 254
+   ypos -279
+  }
+  Dot {
+   name Dot3
+   label expo
+   xpos 288
+   ypos -241
+  }
+push $N53fc1290
+  Dot {
+   name Dot2
+   label linear
+   xpos 440
+   ypos -271
+  }
+  Switch {
+   inputs 2
+   which {{parent.MasterControl.sfotype}}
+   name Switch7
+   xpos 343
+   ypos -206
+  }
+  Grade {
+   black_clamp false
+   name Grade10
+   xpos 343
+   ypos -172
+  }
+set N53cc2350 [stack 0]
+  Grade {
+   multiply {{parent.MasterControl.sthk}}
+   black_clamp false
+   name Grade13
+   xpos 343
+   ypos -117
+  }
+set N53ab3380 [stack 0]
+push $N53cc2350
+push $Nf531ddd0
+  Dot {
+   name Dot42
+   xpos 750
+   ypos -822
+  }
+set N539b3ea0 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r+(2*pi/nr))  *(nr/2))"
+   name Expression30
+   xpos 730
+   ypos -726
+  }
+push $Naae35030
+  Dot {
+   name Dot36
+   xpos 981
+   ypos -893
+  }
+set N534b7220 [stack 0]
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r+(2*pi/nr))  * (nr/2))"
+   name Expression12
+   xpos 1026
+   ypos -809
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch11
+   xpos 1026
+   ypos -658
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression32
+   xpos 1026
+   ypos -588
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy6
+   xpos 1026
+   ypos -110
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression34
+   xpos 1026
+   ypos -21
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge14
+   xpos 1026
+   ypos 37
+  }
+  Grade {
+   blackpoint {{Grade9.blackpoint}}
+   blackpoint_panelDropped {{Grade9.blackpoint_panelDropped}}
+   whitepoint {{Grade9.whitepoint}}
+   whitepoint_panelDropped {{Grade9.whitepoint_panelDropped}}
+   black {{Grade9.black}}
+   black_panelDropped {{Grade9.black_panelDropped}}
+   white {{Grade9.white}}
+   white_panelDropped {{Grade9.white_panelDropped}}
+   multiply {{Grade9.multiply}}
+   multiply_panelDropped {{Grade9.multiply_panelDropped}}
+   add {{Grade9.add}}
+   add_panelDropped {{Grade9.add_panelDropped}}
+   gamma {{Grade9.gamma}}
+   gamma_panelDropped {{Grade9.gamma_panelDropped}}
+   reverse {{Grade9.reverse}}
+   black_clamp {{Grade9.black_clamp}}
+   white_clamp {{Grade9.white_clamp}}
+   inject {{Grade9.inject}}
+   invert_mask {{Grade9.invert_mask}}
+   fringe {{Grade9.fringe}}
+   process_mask {{Grade9.process_mask}}
+   invert_unpremult {{Grade9.invert_unpremult}}
+   enable_mix_luminance {{Grade9.enable_mix_luminance}}
+   mix_luminance {{Grade9.mix_luminance}}
+   mix {{Grade9.mix}}
+   name Grade19
+   xpos 1026
+   ypos 116
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge2
+   xpos 1046
+   ypos 1309
+  }
+  Grade {
+   gamma 0.63
+   name Grade5
+   label "odd ray grade"
+   xpos 1046
+   ypos 1372
+  }
+push $N562bc780
+push $N53ab3380
+push $N53cc2350
+push $N539b3ea0
+  Expression {
+   temp_name0 centerx
+   temp_expr0 width/2
+   temp_name1 centery
+   temp_expr1 height/2
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx) , (y - centery))+r)  * (nr/2))"
+   name Expression1
+   xpos 564
+   ypos -716
+  }
+push $N534b7220
+  Expression {
+   temp_name0 centerx
+   temp_expr0 parent.MasterControl.center.x
+   temp_name1 centery
+   temp_expr1 parent.MasterControl.center.y
+   temp_name2 nr
+   temp_expr2 parent.MasterControl.nr
+   temp_name3 r
+   temp_expr3 radians(parent.MasterControl.rotation)
+   expr0 "cos(  (atan((x - centerx)*(1/parent.MasterControl.scale.0) , (y - centery)*(1/parent.MasterControl.scale.1))+r)  * (nr/2))"
+   name Expression5
+   xpos 838
+   ypos -807
+  }
+  Switch {
+   inputs 2
+   which {{parent.Switch3.which}}
+   name Switch8
+   xpos 838
+   ypos -653
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.coneangle
+   expr0 ((r-1)*ca*pi)+1
+   name Expression31
+   xpos 838
+   ypos -583
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.green
+   name Copy5
+   xpos 838
+   ypos -178
+  }
+  Expression {
+   temp_name0 ca
+   temp_expr0 parent.MasterControl.ssize*-1
+   expr0 ((r-1)*(ca*g+1))+1
+   expr1 0
+   name Expression33
+   xpos 838
+   ypos -89
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge13
+   xpos 838
+   ypos -33
+  }
+  Grade {
+   multiply 0.83
+   add {{parent.MasterControl.thickness}}
+   white_clamp true
+   name Grade9
+   xpos 838
+   ypos 81
+  }
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge1
+   xpos 838
+   ypos 1354
+  }
+  Merge2 {
+   inputs 2
+   operation max
+   name Merge11
+   xpos 923
+   ypos 1444
+  }
+  Shuffle {
+   green red
+   blue red
+   alpha black
+   name Shuffle1
+   label "\[value in]"
+   xpos 923
+   ypos 1510
+  }
+  Grade {
+   multiply 0.8
+   black_clamp false
+   name Grade15
+   xpos 923
+   ypos 1592
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge6
+   xpos 923
+   ypos 1683
+   disable {{1-parent.MasterControl.boolean}}
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge5
+   xpos 923
+   ypos 1917
+   disable {{1-parent.MasterControl.boolean_2}}
+  }
+  Shuffle {
+   alpha black
+   name Shuffle2
+   label "\[value in]"
+   xpos 923
+   ypos 2293
+  }
+  Grade {
+   gamma 0.9
+   black_clamp false
+   name Grade14
+   xpos 923
+   ypos 2637
+  }
+  Dot {
+   name Dot17
+   xpos 957
+   ypos 2874
+  }
+set N520ba030 [stack 0]
+  Transform {
+   scale {{parent.Reformat3.scale.0} {parent.Reformat3.scale.1}}
+   center {{width/2} {height/2}}
+   filter Mitchell
+   name Transform1
+   label scale
+   xpos 1096
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {1.2 1}
+   resize none
+   filter Lanczos4
+   name Reformat3
+   label "scale format"
+   xpos 1221
+   ypos 2864
+  }
+  Reformat {
+   type scale
+   scale {{parent.MasterControl.radius/200}}
+   filter Lanczos4
+   name Reformat2
+   label radius
+   xpos 1338
+   ypos 2864
+  }
+  Shuffle {
+   alpha white
+   name Shuffle4
+   label "\[value in]"
+   xpos 1448
+   ypos 2864
+  }
+set N51dbcf80 [stack 0]
+push $N51dbcf80
+  Shuffle {
+   alpha white
+   name Shuffle10
+   label "\[value in]"
+   xpos 1552
+   ypos 2864
+   disable {{parent.togglefix}}
+  }
+  Grade {
+   multiply 1e-05
+   black_clamp false
+   name Grade17
+   label normalize
+   xpos 1662
+   ypos 2864
+  }
+push $Nab033190
+  Shuffle {
+   alpha white
+   name Shuffle3
+   label "\[value in]"
+   xpos 1792
+   ypos 2574
+  }
+  Convolve2 {
+   inputs 2
+   channels rgba
+   filter_channel rgba.red
+   use_input_channels true
+   normalize false
+   name Convolve1
+   xpos 1792
+   ypos 2870
+  }
+  Shuffle {
+   alpha black
+   name Shuffle9
+   label "\[value in]"
+   xpos 1792
+   ypos 2919
+  }
+  Crop {
+   box {0 0 {input.width} {input.height}}
+   name Crop1
+   xpos 1792
+   ypos 2993
+   disable {{1-parent.MasterControl.boolean_1}}
+  }
+push $N520ba030
+  Switch {
+   inputs 3
+   which {{parent.Switch3.which}}
+   name Switch2
+   xpos 1380
+   ypos 3232
+  }
+  Output {
+   name Output1
+   xpos 1380
+   ypos 3336
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote1
+   label "   create rays    "
+   note_font_size 40
+   xpos 1188
+   ypos -730
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote2
+   label "    spread    "
+   note_font_size 40
+   xpos 1168
+   ypos -103
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote3
+   label "   create glow    "
+   note_font_size 40
+   xpos 642
+   ypos 592
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote5
+   label "    falloff to zero    "
+   note_font_size 40
+   xpos 117
+   ypos 1047
+  }
+  StickyNote {
+   inputs 0
+   name StickyNote6
+   label "    convolve    "
+   note_font_size 40
+   xpos 1557
+   ypos 2747
+  }
+ end_group
+ Grade {
+  white {1.466199994 1.249518752 0.8357340097 1}
+  name Grade1
+  xpos -887
+  ypos 121
+ }
+ Dot {
+  name Dot7
+  xpos -853
+  ypos 262
+ }
+set N50eb7700 [stack 0]
+ Glint {
+  channels rgb
+  length 1000
+  rotation 90
+  steps 10
+  effect_only true
+  name Glint1
+  xpos -704
+  ypos 298
+ }
+ Saturation {
+  saturation 0
+  name Saturation2
+  xpos -704
+  ypos 324
+ }
+ Grade {
+  white {0.2299795002 0.304464817 1.642710924 1}
+  multiply 0.3
+  gamma 4
+  name Grade2
+  xpos -704
+  ypos 350
+ }
+ Blur {
+  size 25
+  name Blur1
+  label "size \[value size]"
+  xpos -704
+  ypos 386
+ }
+ Grade {
+  multiply 0.008
+  name Grade3
+  xpos -704
+  ypos 436
+ }
+push $N50eb7700
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  Achannels rgb
+  name Merge3
+  xpos -887
+  ypos 503
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  name Merge10
+  xpos -887
+  ypos 628
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  Achannels rgb
+  name Merge12
+  xpos -887
+  ypos 785
+ }
+ Multiply {
+  name Multiply11
+  label "core intensity"
+  xpos -887
+  ypos 1286
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  Achannels rgb
+  name Merge8
+  xpos -887
+  ypos 2156
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  name Merge2
+  xpos -887
+  ypos 2362
+ }
+ Grade {
+  multiply 2
+  name Grade9
+  xpos -887
+  ypos 2488
+ }
+ Output {
+  name Output1
+  xpos -887
+  ypos 2588
+ }
+push $N724fcb30
+ NoOp {
+  name NoOp1
+  label "master position\n"
+  xpos -1058
+  ypos -423
+  addUserKnob {20 User}
+  addUserKnob {12 position_2d}
+  position_2d {{curve x1 -27 x50 718 x100 1705} {curve x1 580 x50 253 x100 728}}
+ }
+end_group
