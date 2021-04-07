@@ -2192,6 +2192,7 @@ set Nedc0c60 [stack 0]
  }
  Group {
   name LookAt_2d
+  selected true
   xpos 1300
   ypos 1343
   addUserKnob {20 User l Controls}
@@ -2224,7 +2225,7 @@ set Nedc0c60 [stack 0]
   }
   Transform {
    rotate {{degrees((atan2(center.x+translate.x-lookat.x,center.y+translate.y-lookat.y)*-1))+roffs}}
-   scale 2
+   scale 2.5
    center {640 360}
    filter Mitchell
    name LookAt_2d3
@@ -5190,7 +5191,6 @@ push $Nfbeea20
   size {10 5}
   name Blur9
   label "size \[value size]"
-  selected true
   xpos 182
   ypos 431
  }
