@@ -1,8 +1,8 @@
 NoOp {
  name MirrorPosition
  selected true
- xpos 11195
- ypos -3641
+ xpos 1307
+ ypos -165
  addUserKnob {20 User l Controls}
  addUserKnob {7 offsetx l "static offset x" R -100 100}
  addUserKnob {7 offsety l "static offset y" R -100 100}
@@ -13,6 +13,8 @@ NoOp {
  mirx true
  addUserKnob {6 miry l "mirror y" -STARTLINE}
  miry true
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 text_1 l "" +STARTLINE T "MirrorPosition v1.0\nby Lukas Fabian - March 2019"}
  addUserKnob {20 tab l Positions}
  addUserKnob {12 inpos l "input position"}
  addUserKnob {26 ""}
