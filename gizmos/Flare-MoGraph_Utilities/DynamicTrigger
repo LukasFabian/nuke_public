@@ -1,9 +1,10 @@
 NoOp {
  name Dynamic_Trigger
  selected true
- xpos 10836
- ypos -3644
- addUserKnob {20 User}
+ xpos 1529
+ ypos -169
+ addUserKnob {20 User l Controls}
+ addUserKnob {26 text_4 l "" +STARTLINE T Controls}
  addUserKnob {12 pos l position_2d}
  addUserKnob {7 expand l "expand border distance" R -0.5 0.5}
  expand 0.1
@@ -12,7 +13,7 @@ NoOp {
  addUserKnob {7 boexpo l "exponent for boarder falloff" R 1 10}
  boexpo 5
  addUserKnob {26 ""}
- addUserKnob {26 text l "" +STARTLINE T "read only!"}
+ addUserKnob {26 text l "" +STARTLINE T "below read only!"}
  addUserKnob {26 ""}
  addUserKnob {26 text_2 l "exponential triggers"}
  addUserKnob {7 centtriggerexp l "exponential center trigger"}
@@ -27,6 +28,8 @@ NoOp {
  botriggerlin {{1-dist2boabs}}
  addUserKnob {26 ""}
  addUserKnob {26 ""}
+ addUserKnob {20 group l "calculation steps" n 1}
+ group 0
  addUserKnob {7 dist l "absolute distance2center"}
  dist {{"sqrt( pow2(pos.x-(width/2)) + pow2(pos.y-height/2) )"}}
  addUserKnob {7 distnrmlz l "normalized distance2center"}
@@ -35,21 +38,29 @@ NoOp {
  dist2bo {{1-(dist/((width/2)*(expand+1)))}}
  addUserKnob {7 dist2boabs l "normalized dist2boarder abs"}
  dist2boabs {{abs(dist2bo)}}
+ addUserKnob {20 endGroup n -1}
  addUserKnob {26 ""}
- addUserKnob {26 text_1 l "" +STARTLINE T "Dynamic Trigger v1.0\nby Lukas Fabian - March 2019"}
+ addUserKnob {26 text_1 l "" +STARTLINE T "Dynamic Trigger v1.1\nby Lukas Fabian - April 2020"}
 }
 Expression {
  temp_name0 expand
- temp_expr0 parent.Dynamic_Trigger.expand
+ temp_expr0 expandn
  temp_name1 ceexpo
- temp_expr1 parent.Dynamic_Trigger.ceexpo
+ temp_expr1 centerexpo
  temp_name2 boexpo
- temp_expr2 parent.Dynamic_Trigger.boexpo
+ temp_expr2 boexpon
  expr0 "pow((sqrt(pow2( ((x-(width/2)))/((width/2)*(expand+1)) ) + pow2( ((y-(height/2)))/((width/2)*(expand+1))))) , boexpo)"
  expr1 "pow((1-(sqrt(pow2( ((x-(width/2)))/((width/2)) ) + pow2( ((y-(height/2)))/((width/2)))))), ceexpo)"
- name Expression21
+ name Dynamic_Trigger_Visualizer
  label "visualize exponential\nfalloff"
  selected true
- xpos 10836
- ypos -3618
+ xpos 1529
+ ypos -143
+ addUserKnob {20 User}
+ addUserKnob {7 expandn l expand}
+ expandn {{parent.Dynamic_Trigger.expand}}
+ addUserKnob {7 centerexpo}
+ centerexpo {{parent.Dynamic_Trigger.ceexpo}}
+ addUserKnob {7 boexpon l boexp}
+ boexpon {{parent.Dynamic_Trigger.boexpo}}
 }
